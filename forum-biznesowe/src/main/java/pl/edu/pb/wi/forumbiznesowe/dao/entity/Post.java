@@ -1,5 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
@@ -22,15 +24,26 @@ public class Post {
     private String title;
     @NotBlank
     private String text;
+    private PostStatusEnum status;
+
 
     public Post() {
     }
 
-    public Post(Long id, Set<User> author, String title, String text) {
+    public Post(Long id, Set<User> author, String title, String text, PostStatusEnum status) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.text = text;
+        this.status = status;
+    }
+
+    public PostStatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(PostStatusEnum status) {
+        this.status = status;
     }
 
     public Long getId() {

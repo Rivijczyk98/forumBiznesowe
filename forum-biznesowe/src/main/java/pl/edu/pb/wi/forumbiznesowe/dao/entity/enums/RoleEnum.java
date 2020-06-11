@@ -1,6 +1,6 @@
-package pl.edu.pb.wi.forumbiznesowe.dao.entity;
+package pl.edu.pb.wi.forumbiznesowe.dao.entity.enums;
 
-public enum ERole {
+public enum RoleEnum {
     ROLE_USER ("User"),
     ROLE_VIP ("VIP"),
     ROLE_MODERATOR ("Moderator"),
@@ -8,7 +8,7 @@ public enum ERole {
 
     String value;
 
-    ERole(String value) {
+    RoleEnum(String value) {
         this.value = value;
     }
 
