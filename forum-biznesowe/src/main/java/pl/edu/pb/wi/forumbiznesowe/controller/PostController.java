@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private final PostController postController;
-
     @Autowired
-    public PostController(PostController postController) {
-        this.postController = postController;
-    }
+    private PostController postController;
 
     //TODO dopisać metody API
 }

@@ -1,0 +1,100 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.events {
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.event {
+  width: 250px;
+  height: 400px;
+  margin: 5px;
+  border-radius: 10px;
+  border: 5px solid #383838;
+  background-color: #383838;
+  margin-left: 40px;
+}
+
+.event:hover {
+  border: 5px solid #555555;
+  background-color: #383838;
+  cursor: pointer;
+}
+
+.event-photo {
+  width: 250px;
+  height: 190px;
+}
+
+.event-photo img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  border-radius: 10px;
+}
+
+.event-data {
+  float: left;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.event-title {
+  clear: both;
+  float: left;
+  padding-left: 10px;
+  font-size: 25px;
+  margin-top: 10px;
+  text-align: left;
+}
+
+.custom-pagination {
+  margin-top: 20px;
+}
+
+.pagination-previous,.pagination-next{
+  display: inline-block;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 40px;
+}
+
+.pagination-previous:hover{
+  color: #2ecc71;
+}
+
+.pagination-next:hover {
+  color: #2ecc71;
+}
+
+.pagination-next {
+  float: right;
+}
+
+.pagination-previous {
+  float: left;
+}
+
+input[type = "submit"] {
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+input[type = "submit"]:hover{
+  background: #2ecc71;
+}
