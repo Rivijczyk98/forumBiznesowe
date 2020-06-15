@@ -4,6 +4,7 @@ import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,7 +26,7 @@ public class Post {
     @NotBlank
     private String text;
     private PostStatusEnum status;
-
+    private Date postedDate;
 
     public Post() {
     }
@@ -36,6 +37,14 @@ public class Post {
         this.title = title;
         this.text = text;
         this.status = status;
+    }
+
+    public Date getPostedDate() {
+        return postedDate;
+    }
+
+    public void setPostedDate(Date postedDate) {
+        this.postedDate = postedDate;
     }
 
     public PostStatusEnum getStatus() {
