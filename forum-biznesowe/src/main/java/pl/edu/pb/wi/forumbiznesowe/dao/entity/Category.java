@@ -2,6 +2,7 @@ package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Entity
 @Table(name = "categories")
@@ -14,15 +15,12 @@ public class Category {
     @NotBlank
     private String name;
 
-    private String description;
-
     public Category() {
     }
 
-    public Category(Long id, @NotBlank String name, String description){
+    public Category(Long id, @NotBlank String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
     }
 
     public Long getId() {
@@ -39,13 +37,5 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

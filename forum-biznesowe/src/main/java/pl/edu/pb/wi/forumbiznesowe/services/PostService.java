@@ -6,6 +6,7 @@ import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.services.interfaces.PostServiceInterface;
 
+import java.util.LinkedList;
 import java.util.Optional;
 
 @Service
@@ -47,5 +48,16 @@ public class PostService implements PostServiceInterface {
     @Override
     public void delete(Long id) {
         postRepository.deleteById(id);
+    }
+
+    public Iterable<Post> getPostsByCategory(Long id){
+        Iterable<Post> list = findAll();
+        LinkedList<Post> newList = new LinkedList<>();
+        for(Post p : list){
+            if(p.getCategory().getId().equals(id)){
+                newList.add(p);
+            }
+        }
+        return newList;
     }
 }

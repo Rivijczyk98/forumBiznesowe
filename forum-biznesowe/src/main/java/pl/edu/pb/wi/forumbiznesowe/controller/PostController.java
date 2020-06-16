@@ -12,7 +12,7 @@ import java.util.Optional;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private PostService postService;
+    private final PostService postService;
 
     @Autowired
     public PostController(PostService postService) {
@@ -33,4 +33,20 @@ public class PostController {
     public void addPost(@RequestBody Post post){
         postService.add(post);
     }
+
+    @PutMapping
+    public void updatePost(@RequestBody Post post){
+        postService.update(post);
+    }
+
+    @DeleteMapping
+    public void deletePost(@RequestParam Long id){
+        postService.delete(id);
+    }
+
+    @GetMapping("/category")
+    public Iterable<Post> getPostsByCategory(@RequestParam Long id){
+        return postService.getPostsByCategory(id);
+    }
+
 }

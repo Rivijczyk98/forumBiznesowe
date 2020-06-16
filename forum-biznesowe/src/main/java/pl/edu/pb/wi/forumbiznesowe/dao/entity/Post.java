@@ -18,8 +18,11 @@ public class Post {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_posts",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id"))
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
     private Set<User> author;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Category> category;
 
     @NotBlank
     private String title;
@@ -85,5 +88,16 @@ public class Post {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Category getCategory() {
+        for(Category c : category){
+            return c;
+        }
+        return null;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.category = category;
     }
 }
