@@ -1,9 +1,13 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "status")
 public class Status {
@@ -18,19 +22,4 @@ public class Status {
     public Status() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PostStatusEnum getName() {
-        return name;
-    }
-
-    public void setName(PostStatusEnum name) {
-        this.name = name;
-    }
 }

@@ -1,8 +1,13 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -14,27 +19,15 @@ public class Category {
     @NotBlank
     private String name;
 
+    private String description;
+
     public Category() {
     }
 
-    public Category(Long id, @NotBlank String name) {
+    public Category(Long id, @NotBlank String name, String description) {
         this.id = id;
         this.name = name;
+        this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
