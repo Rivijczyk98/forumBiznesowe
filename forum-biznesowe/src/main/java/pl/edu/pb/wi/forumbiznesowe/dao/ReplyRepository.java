@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
 
 @Repository
-public interface CommentRepository extends JpaRepository<Reply, Long> {
+public interface ReplyRepository extends JpaRepository<Reply, Long> {
 }

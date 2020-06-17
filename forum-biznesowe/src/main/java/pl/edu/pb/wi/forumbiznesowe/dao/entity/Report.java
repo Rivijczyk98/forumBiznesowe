@@ -10,15 +10,16 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @Entity
-@Table(name = "report")
+@Table(name = "reports")
 public class Report {
 
+    @Column(name = "rpo_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "use_id", nullable = false)
     private User author;
 
     @Enumerated(EnumType.STRING)
