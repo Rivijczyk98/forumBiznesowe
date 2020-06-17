@@ -1,21 +1,21 @@
-package pl.edu.pb.wi.forumbiznesowe.services;
+package pl.edu.pb.wi.forumbiznesowe.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
-import pl.edu.pb.wi.forumbiznesowe.services.interfaces.PostServiceInterface;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
 
 import java.util.LinkedList;
 import java.util.Optional;
 
 @Service
-public class PostService implements PostServiceInterface {
+public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
 
     @Autowired
-    public PostService(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
 

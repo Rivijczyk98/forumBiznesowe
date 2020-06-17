@@ -1,15 +1,14 @@
-package pl.edu.pb.wi.forumbiznesowe.services;
+package pl.edu.pb.wi.forumbiznesowe.service;
 
 import org.springframework.stereotype.Service;
-import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
-import pl.edu.pb.wi.forumbiznesowe.services.interfaces.UserServiceInterface;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.UserService;
 
 import java.util.List;
 
 @Service
-public class UserService implements UserServiceInterface {
+public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return null;
     }

@@ -3,7 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
-import pl.edu.pb.wi.forumbiznesowe.services.PostService;
+import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
 import java.util.Optional;
 
@@ -12,10 +12,10 @@ import java.util.Optional;
 @RequestMapping("/posts")
 public class PostController {
 
-    private final PostService postService;
+    private final PostServiceImpl postService;
 
     @Autowired
-    public PostController(PostService postService) {
+    public PostController(PostServiceImpl postService) {
         this.postService = postService;
     }
 
