@@ -23,7 +23,7 @@ public class Report {
     private User author;
 
     @Enumerated(EnumType.STRING)
-    private ReportedObjectEnum reportedObjectName;
+    private ReportedObjectEnum reportedObjectType;
 
     @Column(nullable = false)
     private Long reportedObjectId;
