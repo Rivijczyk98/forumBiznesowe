@@ -3,11 +3,14 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
+import {AdminguardService} from './_guards/adminguard.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'admin_panel', component: AdministratorPanelComponent, canActivate: [AdminguardService] },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -10,7 +10,7 @@ public interface UserServiceInterface {
 
     User findById(Long id);
 
-    User giveRole(Long id, RoleEnum role);
+    User giveRole(User user, String role);
 
     void delete(Long id);
 

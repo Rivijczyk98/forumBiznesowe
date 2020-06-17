@@ -29,9 +29,15 @@ public class UserController {
         return userService.findById(id);
     }
 
+
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {
         return userService.save(user);
+    }
+
+    @PatchMapping("/giveRole")
+    public User giveRole(@RequestBody User user, @RequestParam String role){
+        return userService.giveRole(user, role);
     }
 
 //    @PutMapping("/give")

@@ -1,0 +1,45 @@
+h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.table-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table-table td, .table-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.table-table tr:hover {
+  background-color: #3D3D3D;
+  cursor: pointer;
+}
+
+.table-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #666666;
+  color: white;
+}
+
+.admin-panel-button {
+  background: none;
+  margin-left: 20px;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.admin-panel-button:hover {
+  background: #2ecc71;
+}
