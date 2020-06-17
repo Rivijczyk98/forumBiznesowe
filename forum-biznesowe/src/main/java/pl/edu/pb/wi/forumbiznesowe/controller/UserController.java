@@ -7,9 +7,9 @@ import pl.edu.pb.wi.forumbiznesowe.services.UserService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
