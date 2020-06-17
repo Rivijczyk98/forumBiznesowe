@@ -19,7 +19,7 @@ public class ReportController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createCategory(@RequestBody ReportRequest reportRequest) {
+    public ResponseEntity<Object> reportObject(@RequestBody ReportRequest reportRequest) {
         return reportService.createReport(reportRequest);
     }
 }
