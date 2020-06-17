@@ -1,16 +1,19 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "post_status")
+@Table(name = "status")
 public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private PostStatusEnum name;
 
     public Status() {
     }
@@ -23,11 +26,11 @@ public class Status {
         this.id = id;
     }
 
-    public String getName() {
+    public PostStatusEnum getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(PostStatusEnum name) {
         this.name = name;
     }
 }

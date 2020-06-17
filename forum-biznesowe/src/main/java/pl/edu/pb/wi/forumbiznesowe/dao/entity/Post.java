@@ -1,7 +1,5 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
-import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -16,29 +14,35 @@ public class Post {
     private Long id;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_posts",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    @JoinTable(name = "post_authors",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> author;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "post_category",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> category;
 
     @NotBlank
     private String title;
     @NotBlank
     private String text;
-    private PostStatusEnum status;
+
+    @OneToMany
+    private Set<Status> status;
+
     private Date postedDate;
 
     public Post() {
     }
 
-    public Post(Long id, Set<User> author, String title, String text, PostStatusEnum status) {
-        this.id = id;
-        this.author = author;
-        this.title = title;
-        this.text = text;
+    public Set<Status> getStatus() {
+        return status;
+    }
+
+    public void setStatus(Set<Status> status) {
         this.status = status;
     }
 
@@ -48,14 +52,6 @@ public class Post {
 
     public void setPostedDate(Date postedDate) {
         this.postedDate = postedDate;
-    }
-
-    public PostStatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(PostStatusEnum status) {
-        this.status = status;
     }
 
     public Long getId() {

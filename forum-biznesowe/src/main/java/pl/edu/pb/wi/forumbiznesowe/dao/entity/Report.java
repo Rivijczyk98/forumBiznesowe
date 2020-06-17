@@ -13,10 +13,14 @@ public class Report {
     private Long id;
 
     @NotBlank
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "report_author",
+            joinColumns = @JoinColumn(name = "report_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> author;
 
     private String className;
+
     private Long reportedObjectId;
 
     @NotBlank

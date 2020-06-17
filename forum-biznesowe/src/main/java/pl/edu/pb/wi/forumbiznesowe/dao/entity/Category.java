@@ -2,7 +2,6 @@ package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
 
 @Entity
 @Table(name = "categories")

@@ -36,7 +36,6 @@ public class PostService implements PostServiceInterface {
 
     @Override
     public void update(Post post) {
-
         postRepository.save(post);
     }
 
