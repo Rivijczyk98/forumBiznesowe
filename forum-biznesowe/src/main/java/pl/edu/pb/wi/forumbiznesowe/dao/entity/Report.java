@@ -1,14 +1,9 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.ReportedObjectEnum;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "report")
 public class Report {
@@ -17,14 +12,15 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
-    private User author;
+    @NotBlank
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "report_author",
+            joinColumns = @JoinColumn(name = "report_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> author;
 
-    @Enumerated(EnumType.STRING)
-    private ReportedObjectEnum reportedObjectName;
+    private String className;
 
-    @Column(nullable = false)
     private Long reportedObjectId;
 
     @NotBlank
@@ -33,4 +29,51 @@ public class Report {
     public Report() {
     }
 
+    public Report(Long id, @NotBlank Set<User> author, String className, Long reportedObjectId, @NotBlank String text) {
+        this.id = id;
+        this.author = author;
+        this.className = className;
+        this.reportedObjectId = reportedObjectId;
+        this.text = text;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Set<User> getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Set<User> author) {
+        this.author = author;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public Long getReportedObjectId() {
+        return reportedObjectId;
+    }
+
+    public void setReportedObjectId(Long reportedObjectId) {
+        this.reportedObjectId = reportedObjectId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }
