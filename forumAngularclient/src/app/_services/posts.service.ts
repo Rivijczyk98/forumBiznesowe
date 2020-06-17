@@ -29,11 +29,11 @@ export class PostsService {
   }
 
   public deletePost(id: number) {
-    return this.http.delete(API + '?=' + id);
+    return this.http.delete(API + '?id=' + id);
   }
 
   public getPostsByCategory(id: number){
-    return this.http.get<Post[]>(API + '/category?=' + id);
+    return this.http.get<Post[]>(API + '/category?id=' + id);
   }
 
 }
