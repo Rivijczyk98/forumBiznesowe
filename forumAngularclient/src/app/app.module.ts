@@ -3,13 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {authInterceptorProviders} from './_helpers/auth.interceptor';
-import {HomeComponent} from './home/home.component';
-import {RegisterComponent} from './register/register.component';
-import {LoginComponent} from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 import { PostComponent } from './post/post.component';
+import { PostsListComponent } from './posts-list/posts-list.component';
+import { PostedDatePipe } from './_pipes/posted-date.pipe';
+import { PostSummaryPipe } from './_pipes/post-summary.pipe';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { PostComponent } from './post/post.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    PostComponent
+    PostComponent,
+    PostsListComponent,
+    PostedDatePipe,
+    PostSummaryPipe,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +33,9 @@ import { PostComponent } from './post/post.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

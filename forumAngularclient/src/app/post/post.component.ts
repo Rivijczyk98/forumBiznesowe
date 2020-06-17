@@ -3,6 +3,8 @@ import { PostsService } from '../_services/posts.service';
 import { Observable } from 'rxjs';
 import { Post } from '../_model/post';
 import { Router, ActivatedRoute } from '@angular/router';
+import { RepliesService } from '../_services/replies.service';
+import { Reply } from '../_model/reply';
 
 @Component({
   selector: 'app-post',
@@ -12,9 +14,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class PostComponent implements OnInit {
 
   post: Post
+  replies: Reply[] = [];
   id: number;
 
-  constructor(postService: PostsService, route: ActivatedRoute) {
+  constructor(postService: PostsService, replies: RepliesService, route: ActivatedRoute) {
     
     route.paramMap.subscribe(params => {
       this.id = params["id"];  
@@ -24,7 +27,12 @@ export class PostComponent implements OnInit {
       this.post = p;
     });
 
-   }
+    replies.findAllByPost(this.id).subscribe(r => {
+      r.sort((a, b) => a.postedDate.getDate() - b.postedDate.getDate());
+      this.replies = r;
+    })
+
+  }
 
   ngOnInit(): void {
 
