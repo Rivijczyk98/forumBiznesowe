@@ -8,7 +8,7 @@ const API = 'http://localhost:8081/replays';
 @Injectable({
   providedIn: 'root'
 })
-export class ReplaysService {
+export class RepliesService {
 
   constructor(private http: HttpClient) { }
 
