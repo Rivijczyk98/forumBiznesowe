@@ -9,13 +9,15 @@ import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './register/register.component';
 import {LoginComponent} from './login/login.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
