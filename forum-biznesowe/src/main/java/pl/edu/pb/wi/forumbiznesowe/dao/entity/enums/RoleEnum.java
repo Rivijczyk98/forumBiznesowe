@@ -12,7 +12,8 @@ public enum RoleEnum {
         this.value = value;
     }
 
-    public String toString(){
+    public String getValue() {
         return value;
     }
+
 }

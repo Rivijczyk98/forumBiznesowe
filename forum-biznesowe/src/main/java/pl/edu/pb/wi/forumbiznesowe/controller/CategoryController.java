@@ -2,11 +2,9 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Category;
+import pl.edu.pb.wi.forumbiznesowe.pojo.CategoryRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.CategoryService;
 
 import java.util.List;
@@ -23,10 +21,15 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categoryList = categoryService.getAllCategories();
         return ResponseEntity.ok(categoryList);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> createCategory(@RequestBody CategoryRequest categoryRequest) {
+        categoryService.saveCategory(categoryRequest);
+        return ResponseEntity.ok().build();
     }
 }

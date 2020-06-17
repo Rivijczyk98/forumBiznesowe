@@ -3,6 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -33,9 +34,12 @@ public class Post {
     @NotBlank
     private String text;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sta_id", nullable = false)
-    private Status status;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "sta_id", nullable = false)
+//    private Status status;
+
+    @Enumerated(EnumType.STRING)
+    private PostStatusEnum status;
 
     @Column(nullable = false)
     @CreationTimestamp
