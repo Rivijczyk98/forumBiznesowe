@@ -3,6 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.interfaces.Reportable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "replies")
-public class Reply {
+public class Reply implements Reportable {
 
     @Column(name = "rpl_id")
     @Id
