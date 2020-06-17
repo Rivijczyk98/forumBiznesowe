@@ -7,9 +7,9 @@ import pl.edu.pb.wi.forumbiznesowe.service.ReplyServiceImpl;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/replays")
+@RequestMapping("/replies")
 public class ReplyController {
 
     private final ReplyServiceImpl replyServiceImpl;
@@ -19,6 +19,7 @@ public class ReplyController {
         this.replyServiceImpl = replyServiceImpl;
     }
 
+    //todo do czego to @Daniel? Chyba można wywalić
     @GetMapping("/all")
     public Iterable<Reply> findAll(){
         return replyServiceImpl.findAll();
@@ -35,8 +36,8 @@ public class ReplyController {
     }
 
     @PostMapping
-    public void addReply(@RequestBody Reply reply){
-        replyServiceImpl.addReply(reply);
+    public void addReply(@RequestParam Long postId, @RequestBody Reply reply) {
+        replyServiceImpl.addReply(postId, reply);
     }
 
     @PutMapping

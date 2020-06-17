@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reply } from '../_model/reply';
 
-const API = 'http://localhost:8081/api/replies';
+const API = 'http://localhost:8081/replays';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,4 @@ export class RepliesService {
   public deleteReply(id: number){
     return this.http.delete(API + '?id=' + id);
   }
-
-  
 }

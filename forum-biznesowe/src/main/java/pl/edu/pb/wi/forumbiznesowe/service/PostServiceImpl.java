@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
 
 import java.util.LinkedList;
@@ -30,8 +31,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post add(Post post) {
-        return postRepository.save(post);
+    public void add(Post post) {
+        post.setStatus(PostStatusEnum.APPROVED);
+        postRepository.save(post);
+    }
+
+    @Override
+    public void suggest(Post post) {
+        post.setStatus(PostStatusEnum.PENDING);
+        postRepository.save(post);
     }
 
     @Override

@@ -21,12 +21,10 @@ public class Role {
     @Column(length = 20)
     private RoleEnum name;
 
+    public Role(RoleEnum roleEnum) {
+        this.name = roleEnum;
+    }
+
     public Role() {
-
     }
-
-    public Role(RoleEnum name) {
-        this.name = name;
-    }
-
 }
