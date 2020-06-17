@@ -5,9 +5,10 @@ import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "status")
+@Table(name = "statuses")
 public class Status {
 
+    @Column(name = "sta_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

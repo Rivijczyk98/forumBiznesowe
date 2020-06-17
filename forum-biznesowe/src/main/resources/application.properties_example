@@ -11,4 +11,3 @@ spring.datasource.password=JpzPcnzd
 # App properties
 bill.jwtSecret = secretKey
 bill.jwtExpirationMs= 86400000
-

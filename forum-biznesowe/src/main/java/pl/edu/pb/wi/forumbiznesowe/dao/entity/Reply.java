@@ -2,18 +2,19 @@ package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.ReportedObjectEnum;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "reports")
-public class Report {
+@Table(name = "replies")
+public class Reply {
 
-    @Column(name = "rpo_id")
+    @Column(name = "rpl_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,16 +23,18 @@ public class Report {
     @JoinColumn(name = "use_id", nullable = false)
     private User author;
 
-    @Enumerated(EnumType.STRING)
-    private ReportedObjectEnum reportedObjectName;
-
-    @Column(nullable = false)
-    private Long reportedObjectId;
-
     @NotBlank
     private String text;
 
-    public Report() {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "pos_id", nullable = false)
+    private Post post;
+
+    @Column(nullable = false)
+    @CreationTimestamp
+    private Date postedDate;
+
+    public Reply() {
     }
 
 }

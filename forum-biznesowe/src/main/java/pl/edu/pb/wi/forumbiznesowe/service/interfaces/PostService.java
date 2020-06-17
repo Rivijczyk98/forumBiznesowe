@@ -1,12 +1,13 @@
-package pl.edu.pb.wi.forumbiznesowe.services.interfaces;
+package pl.edu.pb.wi.forumbiznesowe.service.interfaces;
 
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 
 import java.util.Optional;
 
-public interface PostServiceInterface {
+public interface PostService {
 
     Iterable<Post> findAll();
+
     Optional<Post> find(Long id);
 
     Post add(Post post);
@@ -14,5 +15,6 @@ public interface PostServiceInterface {
     void update(Post post);
 
     void delete(Post post);
+
     void delete(Long id);
 }

@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "categories")
 public class Category {
 
+    @Column(name = "cat_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
