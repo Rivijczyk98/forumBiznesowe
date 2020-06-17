@@ -25,22 +25,27 @@ public class PostController {
     }
 
     @GetMapping
-    public Optional<Post> getPost(@RequestParam Long id){
+    public Optional<Post> getPost(@RequestParam Long id) {
         return postService.find(id);
     }
 
     @PostMapping
-    public void addPost(@RequestBody Post post){
+    public void addPost(@RequestBody Post post) {
         postService.add(post);
     }
 
+    @PostMapping("/suggest")
+    public void suggestPost(@RequestBody Post post) {
+        postService.suggest(post);
+    }
+
     @PutMapping
-    public void updatePost(@RequestBody Post post){
+    public void updatePost(@RequestBody Post post) {
         postService.update(post);
     }
 
     @DeleteMapping
-    public void deletePost(@RequestParam Long id){
+    public void deletePost(@RequestParam Long id) {
         postService.delete(id);
     }
 

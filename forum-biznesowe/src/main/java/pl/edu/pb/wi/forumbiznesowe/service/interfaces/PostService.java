@@ -10,11 +10,14 @@ public interface PostService {
 
     Optional<Post> find(Long id);
 
-    Post add(Post post);
+    void add(Post post);
+
+    void suggest(Post post);
 
     void update(Post post);
 
     void delete(Post post);
 
     void delete(Long id);
+
 }

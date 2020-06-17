@@ -25,8 +25,8 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long id, @NotBlank String name) {
-        this.id = id;
+    public Category(String name, String description) {
+        this.description = description;
         this.name = name;
     }
 }
