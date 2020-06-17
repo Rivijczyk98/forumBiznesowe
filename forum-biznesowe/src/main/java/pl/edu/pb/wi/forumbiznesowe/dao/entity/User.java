@@ -27,11 +27,9 @@ public class User {
     @NotBlank
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false)
+    private Role roles;
 
     public User(Long id, @NotBlank String username, @NotBlank String password, @NotBlank String email) {
         this.id = id;

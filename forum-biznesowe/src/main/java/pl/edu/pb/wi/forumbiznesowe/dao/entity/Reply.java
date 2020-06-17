@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -11,8 +12,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "replies")
+public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,24 +23,18 @@ public class Post {
     @JoinColumn(name = "id", nullable = false)
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", nullable = false)
-    private Category category;
-
-    @NotBlank
-    private String title;
-
     @NotBlank
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", nullable = false)
-    private Status status;
+    private Post post;
 
     @Column(nullable = false)
     @CreationTimestamp
     private Date postedDate;
 
-    public Post() {
+    public Reply() {
     }
+
 }
