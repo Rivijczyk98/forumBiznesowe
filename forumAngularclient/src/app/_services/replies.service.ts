@@ -3,12 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reply } from '../_model/reply';
 
-const API = 'http://localhost:8081/api/replays';
+const API = 'http://localhost:8081/replays';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReplaysService {
+export class RepliesService {
 
   constructor(private http: HttpClient) { }
 
