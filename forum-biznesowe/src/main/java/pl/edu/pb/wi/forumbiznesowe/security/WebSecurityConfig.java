@@ -75,7 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
 
-                .antMatchers("/replies/post", "/posts/suggest", "/reports").
+                .antMatchers("/replies/post", "/posts/suggest", "/reports", "/posts").
                 hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
                 .antMatchers(HttpMethod.POST, "/posts").

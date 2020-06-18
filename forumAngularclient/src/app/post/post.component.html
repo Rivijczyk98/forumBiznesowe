@@ -11,7 +11,10 @@
         </div>
 
          <div>
-            <button (click)="editPost()">EDYTUJ</button>
+            <!-- <div *ngIf="tokenService.getUser().id == post.author.id">
+                <button (click)="editPost()">EDYTUJ</button>
+            </div> -->
+            
             <!-- <div *ngIf="reporting = != reporting">
                 <button>ZGŁOŚ</button>
             </div> -->
