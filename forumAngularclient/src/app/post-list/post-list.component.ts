@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {PostsService} from '../_services/posts.service';
+import {Component, OnInit} from '@angular/core';
+import {PostService} from '../_services/post.service';
 import {Post} from '../_model/post';
 import {ActivatedRoute} from '@angular/router';
 
@@ -13,10 +13,11 @@ export class PostListComponent implements OnInit {
   category: string;
   posts: Post[] = [];
 
-  constructor(private postService: PostsService, private route: ActivatedRoute) { }
+  constructor(private postService: PostService, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(() => {
       this.category = this.route.snapshot.params.category;
     });
 

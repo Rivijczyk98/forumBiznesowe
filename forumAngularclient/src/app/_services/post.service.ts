@@ -34,7 +34,7 @@ export class PostService {
   }
 
   public getPostsByCategory(id: string) {
-    return this.http.get<Post[]>(API + '/category?id=' + id);
+    return this.http.get<Post[]>(API + '/category?name=' + id);
   }
 
 }
