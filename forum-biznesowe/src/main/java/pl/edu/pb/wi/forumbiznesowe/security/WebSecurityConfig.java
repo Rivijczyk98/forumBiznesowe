@@ -4,6 +4,7 @@ package pl.edu.pb.wi.forumbiznesowe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,6 +18,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthEntryPointJwt;
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthTokenFilter;
 import pl.edu.pb.wi.forumbiznesowe.security.services.UserDetailsServiceImpl;
+
+import static pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum.*;
 
 @Configuration
 @EnableWebSecurity
@@ -38,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-            authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -57,9 +60,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
-                .antMatchers("/home").permitAll()
+                .authorizeRequests()
+
+                .antMatchers("/auth/**").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/categories", "/posts", "/replies/post/**").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers("/replies/post", "/posts/suggest", "/reports").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/posts").
+                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
+                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

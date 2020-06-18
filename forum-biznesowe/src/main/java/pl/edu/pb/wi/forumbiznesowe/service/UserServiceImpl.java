@@ -1,4 +1,4 @@
-package pl.edu.pb.wi.forumbiznesowe.services;
+package pl.edu.pb.wi.forumbiznesowe.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Role;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
-import pl.edu.pb.wi.forumbiznesowe.services.interfaces.UserServiceInterface;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.UserService;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class UserService implements UserServiceInterface {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;

@@ -3,19 +3,19 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
-import pl.edu.pb.wi.forumbiznesowe.services.UserService;
+import pl.edu.pb.wi.forumbiznesowe.service.UserServiceImpl;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
         this.userService = userService;
     }
 

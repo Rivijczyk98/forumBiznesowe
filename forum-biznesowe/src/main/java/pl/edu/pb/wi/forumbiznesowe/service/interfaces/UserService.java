@@ -1,11 +1,11 @@
-package pl.edu.pb.wi.forumbiznesowe.services.interfaces;
+package pl.edu.pb.wi.forumbiznesowe.service.interfaces;
 
-import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 
 import java.util.List;
 
-public interface UserServiceInterface {
+public interface UserService {
     List<User> findAll();
 
     User findById(Long id);

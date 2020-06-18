@@ -1,4 +1,11 @@
 export class Role {
-  id: string;
-  name: string;
+    id: number;
+    name: RoleEnum;
+}
+
+export enum RoleEnum {
+    ROLE_USER,
+    ROLE_VIP,
+    ROLE_MODERATOR,
+    ROLE_ADMIN
 }
