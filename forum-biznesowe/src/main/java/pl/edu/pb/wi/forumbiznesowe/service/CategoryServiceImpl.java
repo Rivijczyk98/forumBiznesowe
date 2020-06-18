@@ -51,4 +51,9 @@ public class CategoryServiceImpl implements CategoryService {
     public void updateCategory(Category category) {
         categoryRepository.save(category);
     }
+
+    public Category findById(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        return category.orElse(null);
+    }
 }

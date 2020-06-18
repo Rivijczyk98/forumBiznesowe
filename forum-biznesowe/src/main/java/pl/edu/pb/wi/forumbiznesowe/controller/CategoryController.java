@@ -43,4 +43,8 @@ public class CategoryController {
         categoryService.updateCategory(category);
     }
 
+    @GetMapping("/find")
+    public Category findCategoryByID(@RequestParam Long id) {
+        return categoryService.findById(id);
+    }
 }
