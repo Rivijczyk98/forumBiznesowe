@@ -14,11 +14,11 @@ export class CategoryService {
   }
 
   public findAll(): Observable<Category[]> {
+    console.log('będzieGET');
     return this.http.get<Category[]>(API);
   }
 
   public addCategory(category: Category) {
-    console.log('addCategory:Category', category);
     return this.http.post<Category>(API, category);
   }
 

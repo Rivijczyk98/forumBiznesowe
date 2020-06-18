@@ -1,7 +1,7 @@
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {Category} from '../_model/category';
 import {CategoryService} from '../_services/category.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-category-add',
@@ -14,13 +14,14 @@ export class CategoryAddComponent {
   errorMessage = '';
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router: Router
   ) {
   }
 
   onSubmit() {
-    this.categoryService.addCategory(this.prepareCategoryRequest()).subscribe(data => {
-      console.log('guguGU');
+    this.categoryService.addCategory(this.prepareCategoryRequest()).subscribe(() => {
+      this.router.navigate(['/categories']);
     });
   }
 
