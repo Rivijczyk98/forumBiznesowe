@@ -14,8 +14,10 @@ import {PostedDatePipe} from './_pipes/posted-date.pipe';
 import {PostSummaryPipe} from './_pipes/post-summary.pipe';
 import {CategoryComponent} from './category/category.component';
 import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
-import { PostListComponent } from './post-list/post-list.component';
-import { AddPostComponent } from './add-post/add-post.component';
+import {PostListComponent} from './post-list/post-list.component';
+import {AddPostComponent} from './add-post/add-post.component';
+import {CategoryAddComponent} from './category-add/category-add.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { AddPostComponent } from './add-post/add-post.component';
     LoginComponent,
     AdministratorPanelComponent,
     PostListComponent,
-    AddPostComponent
+    AddPostComponent,
+    CategoryAddComponent
   ],
   imports: [
     BrowserModule,
@@ -41,4 +44,5 @@ import { AddPostComponent } from './add-post/add-post.component';
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

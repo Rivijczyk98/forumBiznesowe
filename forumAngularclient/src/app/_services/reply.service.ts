@@ -1,23 +1,24 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Reply } from '../_model/reply';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Reply} from '../_model/reply';
 
-const API = 'http://localhost:8081/replays';
+const API = 'http://localhost:8081/replies';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RepliesService {
+export class ReplyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public findAll(): Observable<Reply[]> {
     return this.http.get<Reply[]>(API + '/all');
   }
 
   public findById(id: number): Observable<Reply> {
-    return this.http.get<Reply>(API + '?id=' + id)
+    return this.http.get<Reply>(API + '?id=' + id);
   }
 
   public findAllByPost(id: number): Observable<Reply[]> {
