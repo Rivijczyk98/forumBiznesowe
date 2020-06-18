@@ -10,7 +10,8 @@ const API = 'http://localhost:8081/posts';
 })
 export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(API + '/all');
@@ -32,7 +33,7 @@ export class PostService {
     return this.http.delete(API + '?id=' + id);
   }
 
-  public getPostsByCategory(id: number) {
+  public getPostsByCategory(id: string) {
     return this.http.get<Post[]>(API + '/category?id=' + id);
   }
 
