@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../_model/user';
-import {Role} from '../_model/role';
 import {UserService} from '../_services/user.service';
 
 @Component({
@@ -20,10 +19,6 @@ export class AdministratorPanelComponent implements OnInit {
 
   makePrettyRoleName(name: string) {
     return name.substr(5).toLowerCase();
-  }
-
-  checkIfContaintsRole(roles: Role[], role: string){
-    return roles[0].name === role;
   }
 
   delete(id: number) {

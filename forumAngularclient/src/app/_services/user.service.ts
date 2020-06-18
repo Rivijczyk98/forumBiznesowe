@@ -13,9 +13,9 @@ export class UserService {
   private giveRoleUrl: string;
 
   constructor(private http: HttpClient) {
-    this.getUsersUrl = 'http://localhost:8081/api/users/all';
-    this.deleteUserUrl = 'http://localhost:8081/api/users/delete';
-    this.giveRoleUrl = 'http://localhost:8081/api/users/giveRole';
+    this.getUsersUrl = 'http://localhost:8081/users/all';
+    this.deleteUserUrl = 'http://localhost:8081/users/delete';
+    this.giveRoleUrl = 'http://localhost:8081/users/giveRole';
   }
 
   public findAll(): Observable<User[]> {

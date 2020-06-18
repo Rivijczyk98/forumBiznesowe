@@ -24,7 +24,7 @@ import {AdministratorPanelComponent} from './administrator-panel/administrator-p
     PostComponent,
     PostedDatePipe,
     PostSummaryPipe,
-    CategoryComponent
+    CategoryComponent,
     LoginComponent,
     AdministratorPanelComponent
   ],
