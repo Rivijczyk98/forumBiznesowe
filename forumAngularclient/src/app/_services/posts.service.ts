@@ -36,4 +36,8 @@ export class PostsService {
     return this.http.get<Post[]>(API + '/category?id=' + id);
   }
 
+  public changeIsObserved(isOb: boolean, post: Post){
+    return this.http.patch<Post>(API + '/observed?value=' + isOb, post);
+  }
+
 }

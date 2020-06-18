@@ -14,11 +14,11 @@
         <button *ngIf="tokenService.getUser().id == post.author.id" (click)="delete()">USUŃ</button>
         <button *ngIf="tokenService.getUser().id == post.author.id && 
                 !post.isObserved && 
-                tokenService.getUser().role > 1" 
+                tokenService.getUser().role.name > 1" 
                 (click)="changeIsObserved(true)">OBSERWUJ</button>
         <button *ngIf="tokenService.getUser().id == post.author.id && 
                 post.isObserved && 
-                tokenService.getUser().role > 1" 
+                tokenService.getUser().role.name > 1" 
                 (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
     </div>
 </div>
@@ -33,5 +33,5 @@
 
 <!-- wyświetlanie reply -->
 <div *ngFor="let r in replies">
-    <reply [reply]="r" [post]="post"></reply>
+    <reply [object]="{reply: r, post: post}"></reply>
 </div>

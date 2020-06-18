@@ -15,28 +15,32 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class PostComponent implements OnInit {
 
   form: any = {};
-  post: Post
+  post: Post = new Post();
   replies: Reply[] = [];
-  id: number;
+  id: number = null;
 
-  constructor(public postService: PostsService, public repliesService: RepliesService, route: ActivatedRoute, public router: Router, public tokenService: TokenStorageService) {
-    
-    route.paramMap.subscribe(params => {
-      this.id = params["id"];  
-    })
-
-    postService.findById(this.id).subscribe(p => {
-      this.post = p;
-    });
-
-    repliesService.findAllByPost(this.id).subscribe(r => {
-      r.sort((a, b) => a.postedDate.getDate() - b.postedDate.getDate());
-      this.replies = r;
-    })
+  constructor(
+    private postService: PostsService, 
+    private repliesService: RepliesService, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    private tokenService: TokenStorageService) {
 
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.id = params["id"];  
+    })
+
+    this.postService.findById(this.id).subscribe(p => {
+      this.post = p;
+    });
+
+    this.repliesService.findAllByPost(this.id).subscribe(r => {
+      r.sort((a, b) => a.postedDate.getDate() - b.postedDate.getDate());
+      this.replies = r;
+    })
   }
 
   reply(){
@@ -47,7 +51,7 @@ export class PostComponent implements OnInit {
 
   changeIsObserved(isO: boolean){
     this.postService.changeIsObserved(isO, this.post)
-    this.post.isObserved = !this.post.isObserved;
+    this.post.isObserved = isO;
   }
 
   delete(){
