@@ -8,20 +8,19 @@ const API = 'http://localhost:8081/replies';
 @Injectable({
   providedIn: 'root'
 })
-export class ReplyService {
+export class RepliesService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
-  public findAll(): Observable<Reply[]> {
+  public findAll(): Observable<any[]> {
     return this.http.get<Reply[]>(API + '/all');
   }
 
-  public findById(id: number): Observable<Reply> {
-    return this.http.get<Reply>(API + '?id=' + id);
+  public findById(id: number): Observable<any> {
+    return this.http.get<Reply>(API + '?id=' + id)
   }
 
-  public findAllByPost(id: number): Observable<Reply[]> {
+  public findAllByPost(id: number): Observable<any[]> {
     return this.http.get<Reply[]>(API + '/post?id=' + id);
   }
 

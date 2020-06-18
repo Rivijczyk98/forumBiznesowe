@@ -4,6 +4,7 @@ package pl.edu.pb.wi.forumbiznesowe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,6 +19,8 @@ import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthEntryPointJwt;
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthTokenFilter;
 import pl.edu.pb.wi.forumbiznesowe.security.services.UserDetailsServiceImpl;
 
+import static pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum.*;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -25,11 +28,15 @@ import pl.edu.pb.wi.forumbiznesowe.security.services.UserDetailsServiceImpl;
         // jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
+
+    private UserDetailsServiceImpl userDetailsService;
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+        this.userDetailsService = userDetailsService;
+        this.unauthorizedHandler = unauthorizedHandler;
+    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -59,22 +66,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/*", "/*").permitAll()
+                .antMatchers("/auth/**").permitAll()
 
-//                .antMatchers(HttpMethod.GET, "/categories", "/posts", "/replies/post/*").
-//                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-//
-//                .antMatchers(HttpMethod.POST, "/replies/post", "/posts/suggest", "/reports").
-//                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue())
-//
-//                .antMatchers(HttpMethod.POST, "/posts").
-//                hasAuthority(ROLE_VIP.getValue())
-//
-//                .antMatchers("/categories/*", "/posts/*", "/replies/*")
-//                .hasAuthority(ROLE_MODERATOR.getValue())
-//
-//                .antMatchers("/categories", "/posts/*", "/replies/*", "/reports/*", "/users/*")
-//                .hasAuthority(ROLE_ADMIN.getValue())
+                .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
+
+                .antMatchers("/replies/post", "/posts/suggest", "/reports", "/posts").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/posts").
+                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
+                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
                 .anyRequest().authenticated();
 

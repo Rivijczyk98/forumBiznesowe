@@ -1,13 +1,65 @@
+<!-- wyświetlanie postów -->
 <div>
-    Post
-    <ul>
-        <li>Title: {{post.title}}</li>
-        <li>Text: {{post.text}}</li>
-        <li>Author: {{post.author.username}}</li>
-        <li>Posted: {{post.postedDate}}</li>
-    </ul>
+    <div *ngIf="!editing">
+        <h3>{{post.title}}</h3>
+        <div *ngIf="post.author">
+            <p>{{post.author.username}}</p>
+            <p>{{post.postedDate | getFromDate}}</p>
+        </div>
+        <div>
+            <p>{{post.text}}</p>
+        </div>
+
+         <div>
+            <!-- <div *ngIf="tokenService.getUser().id == post.author.id">
+                <button (click)="editPost()">EDYTUJ</button>
+            </div> -->
+            
+            <!-- <div *ngIf="reporting = != reporting">
+                <button>ZGŁOŚ</button>
+            </div> -->
+            <!-- <div *ngIf="tokenService.getUser().id == post.author.id">
+                <button (click)="delete()">USUŃ</button> 
+            </div>
+            <div *ngIf="tokenService.getUser().id == post.author.id && 
+            !post.isObserved && 
+            tokenService.getUser().role.name > 1" >
+                <button (click)="changeIsObserved(true)">OBSERWUJ</button>
+            </div>
+            <div *ngIf="tokenService.getUser().id == post.author.id && 
+            post.isObserved && 
+            tokenService.getUser().role.name > 1">
+                <button (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
+            </div>-->
+        </div> 
+    </div>
+
+    <div *ngIf="editing">
+        <form name="editForm" #f="ngForm" (ngSubmit)="edit()" novalidate>
+            <input type="text" value="{{post.text}}" ([ngModel])="editForm.text"/>
+            <input type="submit" value="Zatwierdź"/>
+        </form>
+        <button (click)="editing = false">Anuluj</button>
+    </div>
+    
 </div>
 
-<div>
-    Replays
+<div *ngIf="reporting">
+    <form>
+        <input type="text"/>
+        <input type="submit" name="" value="Wyślij">
+    </form>
+</div>
+
+<!-- wstawianie reply -->
+<div *ngIf="isLoggedIn()">
+    <form (ngSubmit)="reply()" name="form" #f="ngForm" novalidate> 
+        <input type="text" name="text" [(ngModel)]="form.text"/>
+        <input type="submit" value="Odpowiedz"/>
+    </form>
+</div>
+
+<!-- wyświetlanie reply -->
+<div *ngFor="let r of replies">
+    <reply [object]="{reply: r, post: post}"></reply>
 </div>

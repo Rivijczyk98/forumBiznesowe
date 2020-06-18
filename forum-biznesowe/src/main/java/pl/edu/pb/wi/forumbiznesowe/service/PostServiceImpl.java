@@ -7,9 +7,12 @@ import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Category;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.ReplyService;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final ReplyService replyService;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -26,8 +30,9 @@ public class PostServiceImpl implements PostService {
     private UserRepository userRepository;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ReplyService replyService) {
         this.postRepository = postRepository;
+        this.replyService = replyService;
     }
 
     @Override
@@ -64,8 +69,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void update(Post post) {
-        postRepository.save(post);
+    public void update(PostRequest post) {
+        if(find(post.getId()).isPresent())
+        {
+            Post p = find(post.getId()).get();
+            p.setText(post.getText());
+            postRepository.save(p);
+        }
+
     }
 
     @Override
@@ -76,25 +87,25 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long id) {
         postRepository.deleteById(id);
+        for(Reply r: replyService.findByPostId(id)){
+            replyService.deleteReply(r.getId());
+        }
     }
 
-    public Iterable<Post> getPostsByCategory(String name){
+    public Iterable<Post> getPostsByCategory(Long id){
         Iterable<Post> list = findAll();
         LinkedList<Post> newList = new LinkedList<>();
-
         for(Post p : list){
-            if(p.getCategory().getName().toLowerCase().equals(name.toLowerCase())){
+            if(p.getCategory().getId().equals(id)){
                 newList.add(p);
             }
         }
-
         return newList;
     }
 
-    public void changeIsObserved(Long id){
-        if(find(id).isPresent()){
-            Post post = find(id).get();
-            post.setObserved(!post.getIsObserved());
+    public void changeIsObserved(Boolean isObserved, Post post){
+        if(find(post.getId()).isPresent()){
+            post.setObserved(isObserved);
             postRepository.save(post);
         }
     }

@@ -10,4 +10,5 @@ export class Post{
     text: string;
     status: Status;
     postedDate: Date;
+    isObserved: boolean;
 }

@@ -3,6 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
+import pl.edu.pb.wi.forumbiznesowe.pojo.UsernameResponse;
 import pl.edu.pb.wi.forumbiznesowe.service.UserServiceImpl;
 
 import java.util.List;
@@ -22,6 +23,11 @@ public class UserController {
     @GetMapping("/all")
     public List<User> getUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/username")
+    public UsernameResponse getUsername(@RequestParam Long id){
+        return new UsernameResponse(userService.getUsername(id)) ;
     }
 
     @GetMapping("/find")

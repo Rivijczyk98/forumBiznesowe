@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.controller.PostController;
 import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
@@ -17,7 +19,6 @@ import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,18 +27,16 @@ public class ForumBiznesoweApplication {
 
 	RoleRepository roleRepository;
 	UserRepository userRepository;
-
-	@Autowired
-	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository) {
-		this.roleRepository = roleRepository;
-		this.userRepository = userRepository;
-	}
-
-	@Autowired
+	CategoryRepository categoryRepository;
 	PostRepository postRepository;
 
 	@Autowired
-	CategoryRepository categoryRepository;
+	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository, CategoryRepository categoryRepository, PostRepository postRepository) {
+		this.roleRepository = roleRepository;
+		this.userRepository = userRepository;
+		this.categoryRepository = categoryRepository;
+		this.postRepository = postRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ForumBiznesoweApplication.class, args);
@@ -83,11 +82,12 @@ public class ForumBiznesoweApplication {
 
 		categoryRepository.save(category1);
 
-		Post post1 = new Post(user, category1, "Zmienne w Javie", "Mógłby mi ktoś wymienić wszystkie zmienne jakie występują w Javie?", PostStatusEnum.PENDING, Calendar.getInstance().getTime());
-		Post post2 = new Post(vip, category1, "Java - typy zmiennoprzecinkowe", "Jakie są typy zmiennoprzycinkowe w Javie?", PostStatusEnum.APPROVED, Calendar.getInstance().getTime());
+		Post post1 = new Post(user, category1, "Zmienne w Javie", "Mógłby mi ktoś wymienić wszystkie zmienne jakie występują w Javie?", PostStatusEnum.PENDING);
+		Post post2 = new Post(vip, category1, "Java - typy zmiennoprzecinkowe", "Jakie są typy zmiennoprzycinkowe w Javie?", PostStatusEnum.APPROVED);
 
 		postRepository.save(post1);
 		postRepository.save(post2);
+
 	}
 
 

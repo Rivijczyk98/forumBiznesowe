@@ -61,6 +61,16 @@ public class Post implements Reportable {
         this.postedDate = postedDate;
     }
 
+    public Post(User author, Category category, String title, String text, PostStatusEnum status){
+        this.author = author;
+        this.category = category;
+        this.title = title;
+        this.text = text;
+        this.status = status;
+        this.postedDate = new Date();
+        this.isObserved = true;
+    }
+
     public boolean getIsObserved(){
         return isObserved;
     }
