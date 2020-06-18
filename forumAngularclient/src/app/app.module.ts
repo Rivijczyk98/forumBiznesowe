@@ -1,12 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 import {authInterceptorProviders} from './_helpers/auth.interceptor';
 import {HomeComponent} from './home/home.component';
 import {RegisterComponent} from './register/register.component';
@@ -16,6 +14,8 @@ import {PostedDatePipe} from './_pipes/posted-date.pipe';
 import {PostSummaryPipe} from './_pipes/post-summary.pipe';
 import {CategoryComponent} from './category/category.component';
 import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
+import {PostListComponent} from './post-list/post-list.component';
+import {AddPostComponent} from './add-post/add-post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
 
 
@@ -31,23 +31,17 @@ import {CategoryAddComponent} from './category-add/category-add.component';
     CategoryComponent,
     LoginComponent,
     AdministratorPanelComponent,
+    PostListComponent,
+    AddPostComponent,
     CategoryAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    MatDialogModule,
-    BrowserAnimationsModule
+    HttpClientModule
   ],
-  entryComponents: [
-    CategoryAddComponent
-  ],
-  providers: [authInterceptorProviders,
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
-    {provide: MAT_DIALOG_DATA, useValue: {}},
-    {provide: MatDialogRef, useValue: {}}],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -30,13 +30,13 @@ public class PostController {
     }
 
     @PostMapping
-    public void addPost(@RequestBody Post post) {
-        postService.add(post);
+    public void addPost(@RequestBody Post post, @RequestParam long idUser, @RequestParam String categoryName) {
+        postService.add(post, idUser, categoryName);
     }
 
     @PostMapping("/suggest")
-    public void suggestPost(@RequestBody Post post) {
-        postService.suggest(post);
+    public void suggestPost(@RequestBody Post post, @RequestParam long idUser, @RequestParam String categoryName) {
+        postService.suggest(post, idUser, categoryName);
     }
 
     @PutMapping
@@ -50,8 +50,8 @@ public class PostController {
     }
 
     @GetMapping("/category")
-    public Iterable<Post> getPostsByCategory(@RequestParam Long id){
-        return postService.getPostsByCategory(id);
+    public Iterable<Post> getPostsByCategory(@RequestParam String name){
+        return postService.getPostsByCategory(name);
     }
 
     public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}

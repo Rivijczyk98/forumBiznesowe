@@ -10,8 +10,7 @@ const API = 'http://localhost:8081/posts';
 })
 export class PostService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   public findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(API + '/all');
@@ -21,8 +20,8 @@ export class PostService {
     return this.http.get<Post>(API + '?id=' + id);
   }
 
-  public addPost(post: Post) {
-    return this.http.post<Post>(API, post);
+  public addPost(post: Post, idUser: number, categoryName: string) {
+    return this.http.post<Post>(API + '?idUser=' + idUser + '&categoryName=' + categoryName, post);
   }
 
   public updatePost(post: Post) {
