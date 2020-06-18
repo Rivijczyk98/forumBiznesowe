@@ -18,7 +18,7 @@ export class CategoryService {
     return this.http.get<Category[]>(API);
   }
 
-  public addCategory(category: Category) {
+  public addCategory(category: any) {
     return this.http.post<Category>(API, category);
   }
 

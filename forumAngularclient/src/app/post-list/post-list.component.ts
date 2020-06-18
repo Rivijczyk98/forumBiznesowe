@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class PostListComponent implements OnInit {
 
-  category: string;
+  categoryId: number;
   posts: Post[] = [];
 
   constructor(private postService: PostService, private route: ActivatedRoute) {
@@ -18,10 +18,10 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
-      this.category = this.route.snapshot.params.category;
+      this.categoryId = this.route.snapshot.params.id;
     });
 
-    this.postService.getPostsByCategory(this.category).subscribe(posts => {
+    this.postService.getPostsByCategory(this.categoryId).subscribe(posts => {
       this.posts = posts;
     });
   }

@@ -8,16 +8,17 @@ const API = 'http://localhost:8081/replies';
 @Injectable({
   providedIn: 'root'
 })
-export class RepliesService {
+export class ReplyService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public findAll(): Observable<any[]> {
     return this.http.get<Reply[]>(API + '/all');
   }
 
   public findById(id: number): Observable<any> {
-    return this.http.get<Reply>(API + '?id=' + id)
+    return this.http.get<Reply>(API + '?id=' + id);
   }
 
   public findAllByPost(id: number): Observable<any[]> {
@@ -28,11 +29,11 @@ export class RepliesService {
     return this.http.post<Reply>(API, reply);
   }
 
-  public updateReply(reply: Reply){
+  public updateReply(reply: Reply) {
     return this.http.put<Reply>(API, reply);
   }
 
-  public deleteReply(id: number){
+  public deleteReply(id: number) {
     return this.http.delete(API + '?id=' + id);
   }
 }
