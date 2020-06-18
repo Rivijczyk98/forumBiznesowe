@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'postedDate'
+  name: 'getFromDate'
 })
 export class PostedDatePipe implements PipeTransform {
 
