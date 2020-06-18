@@ -1,13 +1,37 @@
+<!-- wyświetlanie postów -->
 <div>
-    Post
-    <ul>
-        <li>Title: {{post.title}}</li>
-        <li>Text: {{post.text}}</li>
-        <li>Author: {{post.author.username}}</li>
-        <li>Posted: {{post.postedDate}}</li>
-    </ul>
+    <h2>{{post.title}}</h2>
+    <div>
+        <p>{{post.author}}</p>
+        <p>{{post.postedDate | postedDate}}</p>
+    </div>
+    <div>
+        <p>{{post.text}}</p>
+    </div>
+    <div>
+        <button>EDYTUJ</button>
+        <button>ZGŁOŚ</button>
+        <button *ngIf="tokenService.getUser().id == post.author.id" (click)="delete()">USUŃ</button>
+        <button *ngIf="tokenService.getUser().id == post.author.id && 
+                !post.isObserved && 
+                tokenService.getUser().role > 1" 
+                (click)="changeIsObserved(true)">OBSERWUJ</button>
+        <button *ngIf="tokenService.getUser().id == post.author.id && 
+                post.isObserved && 
+                tokenService.getUser().role > 1" 
+                (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
+    </div>
 </div>
 
+<!-- wstawianie reply -->
 <div>
-    Replays
+    <form (ngSubmit)="reply()" name="form" #f="ngForm" novalidate> 
+        <input type="text" name="text"/>
+        <input type="submit" value="Odpowiedz"/>
+    </form>
+</div>
+
+<!-- wyświetlanie reply -->
+<div *ngFor="let r in replies">
+    <reply [reply]="r" [post]="post"></reply>
 </div>

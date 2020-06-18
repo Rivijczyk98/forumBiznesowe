@@ -54,6 +54,7 @@ public class PostController {
         return postService.getPostsByCategory(id);
     }
 
-    public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}
+    @PatchMapping("/observed")
+    public void changeIsObserved(@RequestParam Boolean isObserved, @RequestBody Post post){ postService.changeIsObserved(isObserved, post);}
 
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Category } from '../_model/category';
+import { PostsService } from '../_services/posts.service';
+import { Post } from '../_model/post';
 
 @Component({
   selector: 'app-category',
@@ -7,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor() { }
+  @Input() category: Category;
+
+  posts: Post[] = [];
+
+  constructor(postService: PostsService) {
+    postService.getPostsByCategory(this.category.id).subscribe(p => {
+      this.posts = p;
+    })
+  }
 
   ngOnInit(): void {
   }

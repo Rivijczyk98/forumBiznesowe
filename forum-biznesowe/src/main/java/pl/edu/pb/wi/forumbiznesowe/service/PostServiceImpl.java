@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.ReplyService;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -14,10 +16,12 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+    private final ReplyService replyService;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ReplyService replyService) {
         this.postRepository = postRepository;
+        this.replyService = replyService;
     }
 
     @Override
@@ -55,6 +59,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public void delete(Long id) {
         postRepository.deleteById(id);
+        for(Reply r: replyService.findByPostId(id)){
+            replyService.deleteReply(r.getId());
+        }
     }
 
     public Iterable<Post> getPostsByCategory(Long id){
@@ -68,10 +75,9 @@ public class PostServiceImpl implements PostService {
         return newList;
     }
 
-    public void changeIsObserved(Long id){
-        if(find(id).isPresent()){
-            Post post = find(id).get();
-            post.setObserved(!post.getIsObserved());
+    public void changeIsObserved(Boolean isObserved, Post post){
+        if(find(post.getId()).isPresent()){
+            post.setObserved(isObserved);
             postRepository.save(post);
         }
     }

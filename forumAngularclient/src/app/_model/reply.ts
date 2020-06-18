@@ -7,4 +7,11 @@ export class Reply {
     text: string;
     post: Post;
     postedDate: Date;
+
+    constructor(author, text, post, postedDate){
+        this.author = author;
+        this.text = text;
+        this.post = post;
+        this.postedDate = postedDate;
+    }
 }
