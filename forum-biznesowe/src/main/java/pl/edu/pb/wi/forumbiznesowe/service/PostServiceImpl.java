@@ -6,6 +6,7 @@ import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.ReplyService;
 
@@ -47,8 +48,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void update(Post post) {
-        postRepository.save(post);
+    public void update(PostRequest post) {
+        if(find(post.getId()).isPresent())
+        {
+            Post p = find(post.getId()).get();
+            p.setText(post.getText());
+            postRepository.save(p);
+        }
+
     }
 
     @Override

@@ -17,6 +17,7 @@ export class PostComponent implements OnInit {
   editing: boolean = false;
   reporting: boolean = false;
   form: any = {};
+  editForm: any = {};
   post: Post = new Post();
   replies: Reply[] = [];
   id: number = null;
@@ -35,25 +36,27 @@ export class PostComponent implements OnInit {
   }
 
   async load(){
-    await  this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
       this.id = +params.get('id');  
     })
 
-    await  this.postService.findById(this.id).subscribe(p => {
+    this.postService.findById(this.id).subscribe(p => {
       this.post = p;
-      console.log(this.post)
+      this.post.postedDate = new Date(p.postedDate)
     });
 
-    await  this.repliesService.findAllByPost(this.id).subscribe(r => {
-      r.sort((a, b) => a.postedDate.getDate() - b.postedDate.getDate());
-      this.replies = r;
-      console.log(r)
+    this.repliesService.findAllByPost(this.id).subscribe(r => {
+      r.forEach(rep => {
+        this.replies.push({id: rep.id, author: rep.author.id, text: rep.text, post: rep.post.id, postedDate: new Date(rep.postedDate)});
+      });
     })
   }
 
   reply(){
-    var newReply: Reply = new Reply(this.tokenService.getUser(), this.form.text, this.post, new Date());
-    this.repliesService.addReply(newReply)
+    var newReply: Reply = new Reply(this.tokenService.getUser().id, this.form.text, this.post.id, new Date());
+    this.repliesService.addReply(newReply).subscribe(res => {
+      this.ngOnInit();
+    });
     this.replies.push(newReply);
   }
 
@@ -69,13 +72,20 @@ export class PostComponent implements OnInit {
     this.router.navigateByUrl('/category?id=' + categoryID)
   }
 
+  isLoggedIn(){
+    return !!this.tokenService.getToken();
+  }
+
   editPost(){
     this.reporting = false;
     this.editing = true;
   }
 
   edit(){
-    
+    this.post.text = this.editForm.text
+    this.postService.updatePost(this.post);
+    this.editing = false;
+    this.ngOnInit();
   }
 
 }

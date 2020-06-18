@@ -25,7 +25,15 @@ export class PostsService {
   }
 
   public updatePost(post: Post) {
-    return this.http.put<Post>(API, post);
+    return this.http.put<Post>(API, 
+      {id: post.id, 
+        author: post.author.id, 
+        category: post.category.id, 
+        title: post.title, 
+        text: post.text, 
+        isObserved: post.isObserved, 
+        status: post.status.name, 
+        postedDate: post.postedDate});
   }
 
   public deletePost(id: number) {

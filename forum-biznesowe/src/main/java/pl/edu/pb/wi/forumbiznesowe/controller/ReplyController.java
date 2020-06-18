@@ -3,6 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
+import pl.edu.pb.wi.forumbiznesowe.pojo.ReplyRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.ReplyServiceImpl;
 
 import java.util.Optional;
@@ -34,8 +35,8 @@ public class ReplyController {
         return replyServiceImpl.findByPostId(id);
     }
 
-    @PostMapping("/add")
-    public Reply addReply(@RequestBody Reply reply) {
+    @PostMapping
+    public Reply addReply(@RequestBody ReplyRequest reply) {
         return replyServiceImpl.addReply(reply);
     }
 

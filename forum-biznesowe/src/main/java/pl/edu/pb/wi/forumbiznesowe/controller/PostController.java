@@ -3,6 +3,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
 import java.util.Optional;
@@ -40,7 +41,7 @@ public class PostController {
     }
 
     @PutMapping
-    public void updatePost(@RequestBody Post post) {
+    public void updatePost(@RequestBody PostRequest post) {
         postService.update(post);
     }
 

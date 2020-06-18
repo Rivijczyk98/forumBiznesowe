@@ -36,6 +36,7 @@ public class Reply implements Reportable {
     private Date postedDate;
 
     public Reply() {
+        postedDate = new Date();
     }
 
 }

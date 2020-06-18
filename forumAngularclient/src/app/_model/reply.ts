@@ -3,9 +3,9 @@ import { Post } from './post';
 
 export class Reply {
     id: number;
-    author: User;
+    author: number;
     text: string;
-    post: Post;
+    post: number;
     postedDate: Date;
 
     constructor(author, text, post, postedDate){

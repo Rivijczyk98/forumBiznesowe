@@ -71,19 +71,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/**", "/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
 
-//                .antMatchers(HttpMethod.GET, "/categories", "/replies/post/**").
-//                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-//
-//                .antMatchers("/replies/post", "/posts/suggest", "/reports").
-//                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-//
-//                .antMatchers(HttpMethod.POST, "/posts").
-//                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-//
-//                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
-//                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+                .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
+
+                .antMatchers("/replies/post", "/posts/suggest", "/reports").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/posts").
+                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
+                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
                 .anyRequest().authenticated();
 

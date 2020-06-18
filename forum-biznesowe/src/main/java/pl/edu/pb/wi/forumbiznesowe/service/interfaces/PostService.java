@@ -1,6 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.service.interfaces;
 
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ public interface PostService {
 
     void suggest(Post post);
 
-    void update(Post post);
+    void update(PostRequest post);
 
     void delete(Post post);
 

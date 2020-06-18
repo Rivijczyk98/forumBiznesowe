@@ -12,21 +12,20 @@ export class RepliesService {
 
   constructor(private http: HttpClient) { }
 
-  public findAll(): Observable<Reply[]> {
+  public findAll(): Observable<any[]> {
     return this.http.get<Reply[]>(API + '/all');
   }
 
-  public findById(id: number): Observable<Reply> {
+  public findById(id: number): Observable<any> {
     return this.http.get<Reply>(API + '?id=' + id)
   }
 
-  public findAllByPost(id: number): Observable<Reply[]> {
+  public findAllByPost(id: number): Observable<any[]> {
     return this.http.get<Reply[]>(API + '/post?id=' + id);
   }
 
   public addReply(reply: Reply) {
-    console.log(reply)
-    return this.http.post<Reply>(API + '/add', reply);
+    return this.http.post<Reply>(API, reply);
   }
 
   public updateReply(reply: Reply){
