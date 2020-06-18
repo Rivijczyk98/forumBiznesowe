@@ -15,6 +15,4 @@ public interface UserService {
     void delete(Long id);
 
     User save(User user);
-
-    String getUsername(Long id);
 }

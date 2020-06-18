@@ -28,15 +28,11 @@ import static pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum.*;
         // jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private UserDetailsServiceImpl userDetailsService;
-    private AuthEntryPointJwt unauthorizedHandler;
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
-        this.userDetailsService = userDetailsService;
-        this.unauthorizedHandler = unauthorizedHandler;
-    }
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -68,9 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/auth/**").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
+                .antMatchers(HttpMethod.GET, "/categories", "/posts", "/replies/post/**").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
-                .antMatchers("/replies/post", "/posts/suggest", "/reports", "/posts").
+                .antMatchers("/replies/post", "/posts/suggest", "/reports").
                 hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
                 .antMatchers(HttpMethod.POST, "/posts").

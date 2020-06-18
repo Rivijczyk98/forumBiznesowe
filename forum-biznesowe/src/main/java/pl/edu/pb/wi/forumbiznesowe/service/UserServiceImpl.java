@@ -17,14 +17,11 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     UserRepository userRepository;
-    RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
+    RoleRepository roleRepository;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -93,10 +90,4 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         return null;
     }
-
-    @Override
-    public String getUsername(Long id) {
-        return findById(id).getUsername();
-    }
-
 }

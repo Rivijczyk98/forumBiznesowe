@@ -2,7 +2,6 @@ package pl.edu.pb.wi.forumbiznesowe.service.interfaces;
 
 import org.springframework.http.ResponseEntity;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
-import pl.edu.pb.wi.forumbiznesowe.pojo.ReplyRequest;
 
 import java.util.Optional;
 
@@ -14,7 +13,7 @@ public interface ReplyService {
 
     Iterable<Reply> findByPostId(Long id);
 
-    Reply addReply(ReplyRequest reply);
+    ResponseEntity<Object> addReply(Long postId, Reply reply);
 
     void updateReply(Reply reply);
 

@@ -1,7 +1,6 @@
 package pl.edu.pb.wi.forumbiznesowe.service.interfaces;
 
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
-import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 
 import java.util.Optional;
 
@@ -11,14 +10,16 @@ public interface PostService {
 
     Optional<Post> find(Long id);
 
-    void add(Post post, long idUser, String categoryName);
+    void add(Post post);
 
-    void suggest(Post post, long idUser, String categoryName);
+    void suggest(Post post);
 
-    void update(PostRequest post);
+    void update(Post post);
 
     void delete(Post post);
 
     void delete(Long id);
+
+    void accept(Post post);
 
 }

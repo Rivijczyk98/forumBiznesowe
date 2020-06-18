@@ -3,15 +3,8 @@ import { Post } from './post';
 
 export class Reply {
     id: number;
-    author: number;
+    author: User;
     text: string;
-    post: number;
+    post: Post;
     postedDate: Date;
-
-    constructor(author, text, post, postedDate){
-        this.author = author;
-        this.text = text;
-        this.post = post;
-        this.postedDate = postedDate;
-    }
 }

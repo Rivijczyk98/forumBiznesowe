@@ -20,14 +20,14 @@ public class Reply implements Reportable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "use_id", nullable = false)
     private User author;
 
     @NotBlank
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "pos_id", nullable = false)
     private Post post;
 
@@ -36,7 +36,6 @@ public class Reply implements Reportable {
     private Date postedDate;
 
     public Reply() {
-        postedDate = new Date();
     }
 
 }

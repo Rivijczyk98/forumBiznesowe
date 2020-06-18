@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {TokenStorageService} from './token-storage.service';
+import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {TokenStorageService} from "./token-storage.service";
 
 const AUTH_API = 'http://localhost:8081/auth/';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
@@ -14,8 +14,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) {
-  }
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) { }
 
   public login(credentials): Observable<any> {
     return this.http.post(AUTH_API + 'signin', {
@@ -33,42 +32,14 @@ export class AuthService {
   }
 
   public isAdminLoggedIn() {
-    let roles: string[];
-    try {
-      roles = this.tokenStorage.getUser().roles;
-    } catch (e) {
-      return false;
-    }
+    let roles: string[] = [];
+    roles = this.tokenStorage.getUser().roles;
     return roles.includes('ROLE_ADMIN');
   }
 
-  public isModeratorLoggedIn() {
-    let roles: string[];
-    try {
-      roles = this.tokenStorage.getUser().roles;
-    } catch (e) {
-      return false;
-    }
-    return roles.includes('ROLE_MODERATOR') || this.isAdminLoggedIn();
-  }
-
-  public isVipLoggedIn() {
-    let roles: string[];
-    try {
-      roles = this.tokenStorage.getUser().roles;
-    } catch (e) {
-      return false;
-    }
-    return roles.includes('ROLE_VIP') || this.isModeratorLoggedIn();
-  }
-
   public isUserLoggedIn() {
-    let roles: string[];
-    try {
-      roles = this.tokenStorage.getUser().roles;
-    } catch (e) {
-      return false;
-    }
-    return roles.includes('ROLE_USER') || this.isVipLoggedIn();
+    let roles: string[] = [];
+    roles = this.tokenStorage.getUser().roles;
+    return roles.includes('ROLE_USER') || roles.includes('ROLE_ADMIN');
   }
 }
