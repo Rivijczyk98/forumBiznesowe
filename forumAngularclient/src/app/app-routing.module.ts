@@ -7,6 +7,7 @@ import {AdministratorPanelComponent} from './administrator-panel/administrator-p
 import {AdminguardService} from './_guards/adminguard.service';
 import { PostComponent } from './post/post.component';
 import {PostListComponent} from './post-list/post-list.component';
+import {AddPostComponent} from './add-post/add-post.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'admin_panel', component: AdministratorPanelComponent, canActivate: [AdminguardService] },
   { path: 'posts/:category', component: PostListComponent, pathMatch: 'full' },
   { path: 'post/:id', component: PostComponent, pathMatch: 'full' },
+  { path: 'addpost/:category', component: AddPostComponent, pathMatch: 'full' },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

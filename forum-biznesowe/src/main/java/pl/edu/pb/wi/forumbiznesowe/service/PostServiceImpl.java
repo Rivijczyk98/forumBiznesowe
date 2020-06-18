@@ -2,8 +2,12 @@ package pl.edu.pb.wi.forumbiznesowe.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.Category;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
 
@@ -14,6 +18,12 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository) {
@@ -31,13 +41,24 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void add(Post post) {
+    public void add(Post post, long idUser, String categoryName) {
         post.setStatus(PostStatusEnum.APPROVED);
-        postRepository.save(post);
+
+        Optional<Category> category = categoryRepository.findByName(categoryName);
+        Optional<User> user = userRepository.findById(idUser);
+
+        if(user.isPresent() && category.isPresent()){
+            post.setAuthor(user.get());
+            post.setCategory(category.get());
+
+            postRepository.save(post);
+        } else {
+            System.out.println("Nie znaleziono użytkownika lub kategorii");
+        }
     }
 
     @Override
-    public void suggest(Post post) {
+    public void suggest(Post post, long idUser, String categoryName) {
         post.setStatus(PostStatusEnum.PENDING);
         postRepository.save(post);
     }
@@ -57,14 +78,16 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
-    public Iterable<Post> getPostsByCategory(Long id){
+    public Iterable<Post> getPostsByCategory(String name){
         Iterable<Post> list = findAll();
         LinkedList<Post> newList = new LinkedList<>();
+
         for(Post p : list){
-            if(p.getCategory().getId().equals(id)){
+            if(p.getCategory().getName().toLowerCase().equals(name.toLowerCase())){
                 newList.add(p);
             }
         }
+
         return newList;
     }
 }

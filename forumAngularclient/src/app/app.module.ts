@@ -15,6 +15,7 @@ import {PostSummaryPipe} from './_pipes/post-summary.pipe';
 import {CategoryComponent} from './category/category.component';
 import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { AddPostComponent } from './add-post/add-post.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PostListComponent } from './post-list/post-list.component';
     CategoryComponent,
     LoginComponent,
     AdministratorPanelComponent,
-    PostListComponent
+    PostListComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
