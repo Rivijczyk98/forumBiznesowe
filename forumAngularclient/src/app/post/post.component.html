@@ -1,26 +1,45 @@
 <!-- wyświetlanie postów -->
 <div>
-    <h2>{{post.title}}</h2>
-    <div>
-        <p>{{post.author}}</p>
-        <p>{{post.postedDate | postedDate}}</p>
+    <div *ngIf="!editing">
+        <h3>{{post.title}}</h3>
+        <div>
+            <p>{{post.author}}</p>
+            <p>{{post.postedDate | postedDate}}</p>
+        </div>
+        <div>
+            <p>{{post.text}}</p>
+        </div>
+
+        <div>
+            <button ((click)="editPost()")>EDYTUJ</button>
+            <button *ngIf="reporting = != reporting">ZGŁOŚ</button>
+            <button *ngIf="tokenService.getUser().id == post.author.id" (click)="delete()">USUŃ</button>
+            <button *ngIf="tokenService.getUser().id == post.author.id && 
+                    !post.isObserved && 
+                    tokenService.getUser().role.name > 1" 
+                    (click)="changeIsObserved(true)">OBSERWUJ</button>
+            <button *ngIf="tokenService.getUser().id == post.author.id && 
+                    post.isObserved && 
+                    tokenService.getUser().role.name > 1" 
+                    (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
+        </div>
     </div>
-    <div>
-        <p>{{post.text}}</p>
+
+    <div *ngIf="editing">
+        <form (ngSubmit)="edit()">
+            <input type="text" value="{{post.text}}"/>
+            <input type="submit" value="Zatwierdź"/>
+        </form>
+        <button (click)="editing = false">Anuluj</button>
     </div>
-    <div>
-        <button>EDYTUJ</button>
-        <button>ZGŁOŚ</button>
-        <button *ngIf="tokenService.getUser().id == post.author.id" (click)="delete()">USUŃ</button>
-        <button *ngIf="tokenService.getUser().id == post.author.id && 
-                !post.isObserved && 
-                tokenService.getUser().role.name > 1" 
-                (click)="changeIsObserved(true)">OBSERWUJ</button>
-        <button *ngIf="tokenService.getUser().id == post.author.id && 
-                post.isObserved && 
-                tokenService.getUser().role.name > 1" 
-                (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
-    </div>
+    
+</div>
+
+<div *ngIf="reporting">
+    <form>
+        <input type="text"/>
+        <input type="submit" name="" value="Wyślij">
+    </form>
 </div>
 
 <!-- wstawianie reply -->

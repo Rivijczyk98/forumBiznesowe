@@ -28,7 +28,7 @@ import { ReplyComponent } from './reply/reply.component';
     CategoryComponent,
     LoginComponent,
     AdministratorPanelComponent,
-    ReplyComponent
+    ReplyComponent,
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,8 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class PostComponent implements OnInit {
 
+  editing: boolean = false;
+  reporting: boolean = false;
   form: any = {};
   post: Post = new Post();
   replies: Reply[] = [];
@@ -59,6 +61,15 @@ export class PostComponent implements OnInit {
     this.postService.deletePost(this.post.id);
     
     this.router.navigateByUrl('/category?id=' + categoryID)
+  }
+
+  editPost(){
+    this.reporting = false;
+    this.editing = true;
+  }
+
+  edit(){
+    
   }
 
 }
