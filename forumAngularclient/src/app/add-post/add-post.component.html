@@ -1,0 +1,27 @@
+<form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="box" name="form" novalidate>
+  <h1>Dodawanie postu</h1>
+
+  <div>
+    <label for="title"></label>
+    <input #title="ngModel" [(ngModel)]="post.title" id="title" name="title" placeholder="Podaj tytuł . . ." required
+           type="text"/>
+  </div>
+
+  <div>
+    <label for="text"></label>
+    <textarea #text="ngModel" [(ngModel)]="post.text" cols="50" id="text" name="text" placeholder="Wprowadź treść . . ."
+              required rows="4" type="text"></textarea>
+  </div>
+
+  <div>
+    <button class="admin-panel-button" name="" type="submit" value="Dodaj">Dodaj</button>
+  </div>
+
+  <div class="alerts">
+    <div *ngIf="f.submitted && title.invalid" role="alert">Tytuł postu jest wymagany</div>
+    <div *ngIf="f.submitted && text.invalid" role="alert">Treść postu jest wymagana</div>
+  </div>
+
+
+</form>
+

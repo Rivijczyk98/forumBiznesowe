@@ -33,7 +33,7 @@ import {ReplyComponent} from './reply/reply.component';
     PostListComponent,
     AddPostComponent,
     CategoryAddComponent,
-    ReplyComponent
+    ReplyComponent,
   ],
   imports: [
     BrowserModule,
