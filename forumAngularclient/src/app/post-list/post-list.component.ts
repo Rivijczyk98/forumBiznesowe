@@ -8,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
+
 export class PostListComponent implements OnInit {
 
   category: string;

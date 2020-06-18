@@ -12,8 +12,6 @@ public interface PostService {
 
     void add(Post post, long idUser, String categoryName);
 
-    void suggest(Post post, long idUser, String categoryName);
-
     void update(Post post);
 
     void delete(Post post);

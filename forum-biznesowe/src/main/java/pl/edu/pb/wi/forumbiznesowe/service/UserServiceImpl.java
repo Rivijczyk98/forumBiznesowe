@@ -1,5 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
@@ -16,6 +18,8 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     UserRepository userRepository;
@@ -59,15 +63,15 @@ public class UserServiceImpl implements UserService {
                 newRoles.add(newRole.get());
                 userToUpdateRole.get().setRoles(newRoles);
 
-                System.out.println("Nadano rolę administratora użytkownikowi " + user.getUsername());
+                logger.info("Nadano rolę administratora użytkownikowi " + user.getUsername());
                 return userRepository.save(userToUpdateRole.get());
             } else {
-                System.out.println("Nie znaleziono roli " + role);
+                logger.info("Nie znaleziono roli " + role);
                 return userRepository.save(user);
             }
 
         } else {
-            System.out.println("Nie znaleziono uzytkownika o nazwie " + user.getUsername());
+            logger.info("Nie znaleziono uzytkownika o nazwie " + user.getUsername());
             return userRepository.save(user);
         }
     }
@@ -78,10 +82,10 @@ public class UserServiceImpl implements UserService {
 
         if(user.isPresent()){
             userRepository.delete(user.get());
-            System.out.println("Pomyślnie usunięto użytkownika");
+            logger.info("Pomyślnie usunięto użytkownika");
         }
         else {
-            System.out.println("Nie znaleziono użytkownika poprzez id");
+            logger.info("Nie znaleziono użytkownika poprzez id");
         }
     }
 

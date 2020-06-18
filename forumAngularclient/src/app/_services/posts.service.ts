@@ -28,12 +28,20 @@ export class PostsService {
     return this.http.put<Post>(API, post);
   }
 
+  public approvePost(post: Post) {
+    return this.http.put<Post>(API + '/approve', post);
+  }
+
   public deletePost(id: number) {
     return this.http.delete(API + '?id=' + id);
   }
 
   public getPostsByCategory(name: string){
     return this.http.get<Post[]>(API + '/category?name=' + name);
+  }
+
+  public getPendedPosts(){
+    return this.http.get<Post[]>(API + '/category-pended');
   }
 
 }
