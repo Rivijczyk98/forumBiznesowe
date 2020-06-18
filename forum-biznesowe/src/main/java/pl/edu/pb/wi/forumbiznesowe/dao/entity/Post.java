@@ -39,6 +39,8 @@ public class Post implements Reportable {
     @NotBlank
     private String text;
 
+    private boolean isObserved;
+
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "sta_id", nullable = false)
 //    private Status status;
@@ -57,5 +59,9 @@ public class Post implements Reportable {
         this.text = text;
         this.status = status;
         this.postedDate = postedDate;
+    }
+
+    public boolean getIsObserved(){
+        return isObserved;
     }
 }

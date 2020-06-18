@@ -54,4 +54,6 @@ public class PostController {
         return postService.getPostsByCategory(name);
     }
 
+    public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}
+
 }
