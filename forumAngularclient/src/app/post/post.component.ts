@@ -18,9 +18,9 @@ export class PostComponent implements OnInit {
   id: number;
 
   constructor(postService: PostsService, replies: RepliesService, route: ActivatedRoute) {
-    
+
     route.paramMap.subscribe(params => {
-      this.id = params["id"];  
+      this.id = params["id"];
     })
 
     postService.findById(this.id).subscribe(p => {

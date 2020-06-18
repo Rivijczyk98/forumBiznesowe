@@ -1,6 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -22,11 +24,8 @@ public class Category {
 
     private String description;
 
-    public Category() {
-    }
-
     public Category(String name, String description) {
-        this.description = description;
         this.name = name;
+        this.description = description;
     }
 }

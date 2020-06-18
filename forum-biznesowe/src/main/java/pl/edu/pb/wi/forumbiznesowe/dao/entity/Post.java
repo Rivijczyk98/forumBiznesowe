@@ -1,6 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.dao.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
@@ -8,10 +9,13 @@ import pl.edu.pb.wi.forumbiznesowe.dao.entity.interfaces.Reportable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "posts")
 public class Post implements Reportable {
@@ -21,11 +25,11 @@ public class Post implements Reportable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "use_id", nullable = false)
     private User author;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "cat_id", nullable = false)
     private Category category;
 
@@ -46,6 +50,12 @@ public class Post implements Reportable {
     @CreationTimestamp
     private Date postedDate;
 
-    public Post() {
+    public Post(User author, Category category, String title, String text, PostStatusEnum status, Date postedDate) {
+        this.author = author;
+        this.category = category;
+        this.title = title;
+        this.text = text;
+        this.status = status;
+        this.postedDate = postedDate;
     }
 }
