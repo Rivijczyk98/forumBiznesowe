@@ -19,7 +19,6 @@ public class ReplyController {
         this.replyServiceImpl = replyServiceImpl;
     }
 
-    //todo do czego to @Daniel? Chyba można wywalić
     @GetMapping("/all")
     public Iterable<Reply> findAll(){
         return replyServiceImpl.findAll();
@@ -35,9 +34,9 @@ public class ReplyController {
         return replyServiceImpl.findByPostId(id);
     }
 
-    @PostMapping
-    public void addReply(@RequestParam Long postId, @RequestBody Reply reply) {
-        replyServiceImpl.addReply(postId, reply);
+    @PostMapping("/add")
+    public Reply addReply(@RequestBody Reply reply) {
+        return replyServiceImpl.addReply(reply);
     }
 
     @PutMapping

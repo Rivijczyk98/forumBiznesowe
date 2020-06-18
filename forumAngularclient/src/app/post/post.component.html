@@ -2,27 +2,33 @@
 <div>
     <div *ngIf="!editing">
         <h3>{{post.title}}</h3>
-        <div>
-            <p>{{post.author}}</p>
-            <p>{{post.postedDate | postedDate}}</p>
+        <div *ngIf="post.author">
+            <p>{{post.author.username}}</p>
+            <p>{{post.postedDate}}</p>
         </div>
         <div>
             <p>{{post.text}}</p>
         </div>
 
-        <div>
+        <!-- <div>
             <button ((click)="editPost()")>EDYTUJ</button>
-            <button *ngIf="reporting = != reporting">ZGŁOŚ</button>
-            <button *ngIf="tokenService.getUser().id == post.author.id" (click)="delete()">USUŃ</button>
-            <button *ngIf="tokenService.getUser().id == post.author.id && 
-                    !post.isObserved && 
-                    tokenService.getUser().role.name > 1" 
-                    (click)="changeIsObserved(true)">OBSERWUJ</button>
-            <button *ngIf="tokenService.getUser().id == post.author.id && 
-                    post.isObserved && 
-                    tokenService.getUser().role.name > 1" 
-                    (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
-        </div>
+            <div *ngIf="reporting = != reporting">
+                <button>ZGŁOŚ</button>
+            </div>
+            <div *ngIf="tokenService.getUser().id == post.author.id">
+                <button (click)="delete()">USUŃ</button> 
+            </div>
+            <div *ngIf="tokenService.getUser().id == post.author.id && 
+            !post.isObserved && 
+            tokenService.getUser().role.name > 1" >
+                <button (click)="changeIsObserved(true)">OBSERWUJ</button>
+            </div>
+            <div *ngIf="tokenService.getUser().id == post.author.id && 
+            post.isObserved && 
+            tokenService.getUser().role.name > 1">
+                <button (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
+            </div>
+        </div> -->
     </div>
 
     <div *ngIf="editing">
@@ -45,12 +51,12 @@
 <!-- wstawianie reply -->
 <div>
     <form (ngSubmit)="reply()" name="form" #f="ngForm" novalidate> 
-        <input type="text" name="text"/>
+        <input type="text" name="text" [(ngModel)]="form.text"/>
         <input type="submit" value="Odpowiedz"/>
     </form>
 </div>
 
 <!-- wyświetlanie reply -->
-<div *ngFor="let r in replies">
+<div *ngFor="let r of replies">
     <reply [object]="{reply: r, post: post}"></reply>
 </div>

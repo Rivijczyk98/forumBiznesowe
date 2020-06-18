@@ -13,7 +13,7 @@ public interface ReplyService {
 
     Iterable<Reply> findByPostId(Long id);
 
-    ResponseEntity<Object> addReply(Long postId, Reply reply);
+    Reply addReply(Reply reply);
 
     void updateReply(Reply reply);
 

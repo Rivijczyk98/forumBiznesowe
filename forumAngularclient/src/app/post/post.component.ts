@@ -27,21 +27,27 @@ export class PostComponent implements OnInit {
     private route: ActivatedRoute, 
     private router: Router, 
     private tokenService: TokenStorageService) {
-
+      this.load();
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.id = params["id"];  
+    
+  }
+
+  async load(){
+    await  this.route.paramMap.subscribe(params => {
+      this.id = +params.get('id');  
     })
 
-    this.postService.findById(this.id).subscribe(p => {
+    await  this.postService.findById(this.id).subscribe(p => {
       this.post = p;
+      console.log(this.post)
     });
 
-    this.repliesService.findAllByPost(this.id).subscribe(r => {
+    await  this.repliesService.findAllByPost(this.id).subscribe(r => {
       r.sort((a, b) => a.postedDate.getDate() - b.postedDate.getDate());
       this.replies = r;
+      console.log(r)
     })
   }
 

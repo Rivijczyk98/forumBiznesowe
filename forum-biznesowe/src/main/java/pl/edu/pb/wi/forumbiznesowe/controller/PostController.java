@@ -7,7 +7,7 @@ import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RestController
 @RequestMapping("/posts")
 public class PostController {

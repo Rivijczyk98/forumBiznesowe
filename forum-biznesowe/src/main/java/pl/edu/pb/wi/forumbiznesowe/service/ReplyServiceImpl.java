@@ -51,8 +51,8 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public ResponseEntity<Object> addReply(Long postId, Reply reply) {
-        Optional<Post> repliedPostOptional = postRepository.findById(postId);
+    public Reply addReply(Reply reply) {
+        Optional<Post> repliedPostOptional = postRepository.findById(reply.getPost().getId());
 
         if (repliedPostOptional.isPresent()) {
             reply.setPost(repliedPostOptional.get());
@@ -62,9 +62,9 @@ public class ReplyServiceImpl implements ReplyService {
                 emailService.sendAutomaticGenerated(reply.getPost().getAuthor().getEmail(), reply.getPost().getId());
             }
 
-            return ResponseEntity.ok().body("Reply added successfuly");
+            return reply;
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post with id " + postId + " not found");
+        return null;
     }
 
     @Override

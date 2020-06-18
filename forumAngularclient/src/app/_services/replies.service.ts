@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reply } from '../_model/reply';
 
-const API = 'http://localhost:8081/replays';
+const API = 'http://localhost:8081/replies';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,8 @@ export class RepliesService {
   }
 
   public addReply(reply: Reply) {
-    return this.http.post<Reply>(API, reply);
+    console.log(reply)
+    return this.http.post<Reply>(API + '/add', reply);
   }
 
   public updateReply(reply: Reply){
