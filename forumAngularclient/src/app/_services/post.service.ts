@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Post } from '../_model/post';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Post} from '../_model/post';
 
 const API = 'http://localhost:8081/posts';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class PostService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public findAll(): Observable<Post[]> {
     return this.http.get<Post[]>(API + '/all');
@@ -32,7 +33,7 @@ export class PostsService {
     return this.http.delete(API + '?id=' + id);
   }
 
-  public getPostsByCategory(id: number){
+  public getPostsByCategory(id: number) {
     return this.http.get<Post[]>(API + '/category?id=' + id);
   }
 

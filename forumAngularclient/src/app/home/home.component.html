@@ -1,0 +1,12 @@
+<h1>Categories</h1>
+<button (click)="createCategory()" class="create-button">Add category</button>
+<div class="table-body">
+  <table class="table-table">
+    <tbody>
+    <tr *ngFor="let category of categories">
+      {{category.name}}
+      {{category.description}}
+    </tr>
+    </tbody>
+  </table>
+</div>

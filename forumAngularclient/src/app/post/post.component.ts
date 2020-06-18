@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { PostsService } from '../_services/posts.service';
-import { Observable } from 'rxjs';
-import { Post } from '../_model/post';
-import { Router, ActivatedRoute } from '@angular/router';
-import { RepliesService } from '../_services/replies.service';
-import { Reply } from '../_model/reply';
+import {Component, OnInit} from '@angular/core';
+import {PostService} from '../_services/post.service';
+import {Post} from '../_model/post';
+import {ActivatedRoute} from '@angular/router';
+import {ReplyService} from '../_services/reply.service';
+import {Reply} from '../_model/reply';
 
 @Component({
   selector: 'app-post',
@@ -13,15 +12,15 @@ import { Reply } from '../_model/reply';
 })
 export class PostComponent implements OnInit {
 
-  post: Post
+  post: Post;
   replies: Reply[] = [];
   id: number;
 
-  constructor(postService: PostsService, replies: RepliesService, route: ActivatedRoute) {
-    
+  constructor(postService: PostService, replies: ReplyService, route: ActivatedRoute) {
+
     route.paramMap.subscribe(params => {
-      this.id = params["id"];  
-    })
+      this.id = params['id'];
+    });
 
     postService.findById(this.id).subscribe(p => {
       this.post = p;
