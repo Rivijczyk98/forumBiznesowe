@@ -12,9 +12,7 @@ import {LoginComponent} from './login/login.component';
 import {PostComponent} from './post/post.component';
 import {PostedDatePipe} from './_pipes/posted-date.pipe';
 import {PostSummaryPipe} from './_pipes/post-summary.pipe';
-import {CategoryComponent} from './category/category.component';
 import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
-import { ReplyComponent } from './reply/reply.component';
 import {PostListComponent} from './post-list/post-list.component';
 import {AddPostComponent} from './add-post/add-post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
@@ -29,10 +27,7 @@ import {CategoryAddComponent} from './category-add/category-add.component';
     PostComponent,
     PostedDatePipe,
     PostSummaryPipe,
-    CategoryComponent,
     LoginComponent,
-    AdministratorPanelComponent,
-    ReplyComponent,
     AdministratorPanelComponent,
     PostListComponent,
     AddPostComponent,
@@ -47,4 +42,5 @@ import {CategoryAddComponent} from './category-add/category-add.component';
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

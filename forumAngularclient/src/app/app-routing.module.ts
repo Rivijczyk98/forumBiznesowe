@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin_panel', component: AdministratorPanelComponent, canActivate: [AdminguardService]},
-  {path: 'posts/:category', component: PostListComponent, pathMatch: 'full'},
+  {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'post/:id', component: PostComponent, pathMatch: 'full'},
   {path: 'addpost/:category', component: AddPostComponent, pathMatch: 'full'},
   {path: '', redirectTo: 'home', pathMatch: 'full'}

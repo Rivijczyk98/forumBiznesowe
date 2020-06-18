@@ -26,15 +26,29 @@ export class PostService {
   }
 
   public updatePost(post: Post) {
-    return this.http.put<Post>(API, post);
+    return this.http.put<Post>(API,
+      {
+        id: post.id,
+        author: post.author.id,
+        category: post.category.id,
+        title: post.title,
+        text: post.text,
+        isObserved: post.isObserved,
+        status: post.status.name,
+        postedDate: post.postedDate
+      });
   }
 
   public deletePost(id: number) {
     return this.http.delete(API + '?id=' + id);
   }
 
-  public getPostsByCategory(id: string) {
-    return this.http.get<Post[]>(API + '/category?name=' + id);
+  public getPostsByCategory(id: number) {
+    return this.http.get<Post[]>(API + '/category?id=' + id);
+  }
+
+  public changeIsObserved(isOb: boolean, post: Post) {
+    return this.http.patch<Post>(API + '/observed?value=' + isOb, post);
   }
 
 }

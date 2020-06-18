@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Category} from '../_model/category';
 import {CategoryService} from '../_services/category.service';
 import {Router} from '@angular/router';
 
@@ -25,7 +24,7 @@ export class CategoryAddComponent {
     });
   }
 
-  prepareCategoryRequest(): Category {
+  prepareCategoryRequest(): any {
     return {
       name: this.form.categoryName,
       description: this.form.categoryDescription

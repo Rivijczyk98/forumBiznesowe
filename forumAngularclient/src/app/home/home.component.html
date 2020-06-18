@@ -4,7 +4,7 @@
   <table class="table-table">
     <tbody>
     <tr *ngFor="let category of categories">
-      <td>
+      <td [routerLink]="[category.id]">
         {{category.name}}<br>
         {{category.description}}
       </td>
