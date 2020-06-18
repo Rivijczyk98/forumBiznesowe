@@ -34,25 +34,41 @@ export class AuthService {
 
   public isAdminLoggedIn() {
     let roles: string[];
-    roles = this.tokenStorage.getUser().roles;
+    try {
+      roles = this.tokenStorage.getUser().roles;
+    } catch (e) {
+      return false;
+    }
     return roles.includes('ROLE_ADMIN');
   }
 
   public isModeratorLoggedIn() {
     let roles: string[];
-    roles = this.tokenStorage.getUser().roles;
+    try {
+      roles = this.tokenStorage.getUser().roles;
+    } catch (e) {
+      return false;
+    }
     return roles.includes('ROLE_MODERATOR') || this.isAdminLoggedIn();
   }
 
   public isVipLoggedIn() {
     let roles: string[];
-    roles = this.tokenStorage.getUser().roles;
+    try {
+      roles = this.tokenStorage.getUser().roles;
+    } catch (e) {
+      return false;
+    }
     return roles.includes('ROLE_VIP') || this.isModeratorLoggedIn();
   }
 
   public isUserLoggedIn() {
     let roles: string[];
-    roles = this.tokenStorage.getUser().roles;
+    try {
+      roles = this.tokenStorage.getUser().roles;
+    } catch (e) {
+      return false;
+    }
     return roles.includes('ROLE_USER') || this.isVipLoggedIn();
   }
 }

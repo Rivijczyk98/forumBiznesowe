@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../_services/category.service';
 import {Category} from '../_model/category';
-import {MatDialog} from '@angular/material/dialog';
-import {CategoryAddComponent} from '../category-add/category-add.component';
+import {AuthService} from '../_services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,8 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    public authService: AuthService
   ) {
   }
 
@@ -27,6 +27,4 @@ export class HomeComponent implements OnInit {
       this.categories = data;
     });
   }
-
-
 }
