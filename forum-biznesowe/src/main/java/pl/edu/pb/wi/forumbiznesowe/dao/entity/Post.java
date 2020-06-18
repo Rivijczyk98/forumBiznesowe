@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.interfaces.Reportable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Setter
 @Entity
 @Table(name = "posts")
-public class Post {
+public class Post implements Reportable {
 
     @Column(name = "pos_id")
     @Id
