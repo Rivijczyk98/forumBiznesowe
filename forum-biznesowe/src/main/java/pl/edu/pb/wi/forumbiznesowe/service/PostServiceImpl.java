@@ -67,4 +67,13 @@ public class PostServiceImpl implements PostService {
         }
         return newList;
     }
+
+    public void changeIsObserved(Long id){
+        if(find(id).isPresent()){
+            Post post = find(id).get();
+            post.setObserved(!post.getIsObserved());
+            postRepository.save(post);
+        }
+    }
+
 }

@@ -1,6 +1,6 @@
- <form
+ <div *ngIf="!isLoggedIn">
+   <form
       class="box"
-      *ngIf="!isLoggedIn"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
@@ -62,6 +62,8 @@
         </div>
       </div>
     </form>
+ </div>
+ 
 
     <div class="alert alert-success" *ngIf="isLoggedIn">
       Zalogowany jako {{ roles }}.

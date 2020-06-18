@@ -17,11 +17,14 @@ import java.util.Set;
 @SpringBootApplication
 public class ForumBiznesoweApplication {
 
-	@Autowired
 	RoleRepository roleRepository;
+	UserRepository userRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository) {
+		this.roleRepository = roleRepository;
+		this.userRepository = userRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ForumBiznesoweApplication.class, args);

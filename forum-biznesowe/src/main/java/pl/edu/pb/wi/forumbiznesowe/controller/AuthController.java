@@ -20,6 +20,8 @@ import pl.edu.pb.wi.forumbiznesowe.payload.response.JwtResponse;
 import pl.edu.pb.wi.forumbiznesowe.payload.response.MessageResponse;
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.JwtUtils;
 import pl.edu.pb.wi.forumbiznesowe.security.services.UserDetailsImpl;
+import pl.edu.pb.wi.forumbiznesowe.service.EmailServiceImpl;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.EmailService;
 
 import javax.validation.Valid;
 import java.util.HashSet;
@@ -31,20 +33,28 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    @Autowired
+
     AuthenticationManager authenticationManager;
 
-    @Autowired
     UserRepository userRepository;
 
-    @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
     PasswordEncoder encoder;
 
-    @Autowired
     JwtUtils jwtUtils;
+
+    EmailServiceImpl emailService;
+
+    @Autowired
+    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtUtils jwtUtils, EmailServiceImpl emailService) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.encoder = encoder;
+        this.jwtUtils = jwtUtils;
+        this.emailService = emailService;
+    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -112,6 +122,8 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
+
+        emailService.sendReplayNotificationEmail(user.getEmail(), "Założono nowe konto!", "Witamy nowu użytkowniku Forum Biznesowego :)\n Co tam u Ciebie?");
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
