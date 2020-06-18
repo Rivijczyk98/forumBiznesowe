@@ -23,21 +23,21 @@ export class PostComponent implements OnInit {
   id: number = null;
 
   constructor(
-    private postService: PostsService, 
-    private repliesService: RepliesService, 
-    private route: ActivatedRoute, 
-    private router: Router, 
+    private postService: PostsService,
+    private repliesService: RepliesService,
+    private route: ActivatedRoute,
+    private router: Router,
     private tokenService: TokenStorageService) {
       this.load();
   }
 
   ngOnInit(): void {
-    
+
   }
 
   async load(){
     this.route.paramMap.subscribe(params => {
-      this.id = +params.get('id');  
+      this.id = +params.get('id');
     })
 
     this.postService.findById(this.id).subscribe(p => {
@@ -68,7 +68,7 @@ export class PostComponent implements OnInit {
   delete(){
     var categoryID: number = this.post.category.id;
     this.postService.deletePost(this.post.id);
-    
+
     this.router.navigateByUrl('/category?id=' + categoryID)
   }
 

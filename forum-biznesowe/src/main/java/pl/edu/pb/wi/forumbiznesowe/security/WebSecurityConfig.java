@@ -4,7 +4,6 @@ package pl.edu.pb.wi.forumbiznesowe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -18,8 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthEntryPointJwt;
 import pl.edu.pb.wi.forumbiznesowe.security.jwt.AuthTokenFilter;
 import pl.edu.pb.wi.forumbiznesowe.security.services.UserDetailsServiceImpl;
-
-import static pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum.*;
 
 @Configuration
 @EnableWebSecurity
@@ -61,14 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and()
-                .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
                 .antMatchers("/auth/**").permitAll()

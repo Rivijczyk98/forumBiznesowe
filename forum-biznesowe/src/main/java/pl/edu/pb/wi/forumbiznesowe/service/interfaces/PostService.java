@@ -11,9 +11,9 @@ public interface PostService {
 
     Optional<Post> find(Long id);
 
-    void add(Post post);
+    void add(Post post, long idUser, String categoryName);
 
-    void suggest(Post post);
+    void suggest(Post post, long idUser, String categoryName);
 
     void update(PostRequest post);
 
