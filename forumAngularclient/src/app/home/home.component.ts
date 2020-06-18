@@ -14,26 +14,12 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(
-    private categoryService: CategoryService,
-    private dialog: MatDialog
+    private categoryService: CategoryService
   ) {
   }
 
   ngOnInit() {
     this.refreshData();
-  }
-
-  createCategory() {
-    const dialogRef = this.dialog.open(CategoryAddComponent, {
-      hasBackdrop: true,
-      // data: this.bugDescription
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.doAction === true) {
-        this.categoryService.addCategory(this.prepareCategoryRequest(result));
-      }
-    });
   }
 
   private refreshData() {
@@ -42,10 +28,5 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  private prepareCategoryRequest(result: any): Category {
-    return {
-      name: result.categoryName,
-      description: result.categoryDescription
-    };
-  }
+
 }

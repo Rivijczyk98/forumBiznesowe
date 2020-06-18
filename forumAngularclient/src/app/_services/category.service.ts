@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Category} from '../_model/category';
-import {Post} from '../_model/post';
 
 const API = 'http://localhost:8081/categories';
 
@@ -19,7 +18,8 @@ export class CategoryService {
   }
 
   public addCategory(category: Category) {
-    return this.http.post<Post>(API, category);
+    console.log('addCategory:Category', category);
+    return this.http.post<Category>(API, category);
   }
 
 }

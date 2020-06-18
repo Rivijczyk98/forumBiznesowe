@@ -4,7 +4,6 @@ package pl.edu.pb.wi.forumbiznesowe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -62,19 +61,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/*").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/categories", "/posts", "/replies/post/**").
+                .antMatchers("/categories", "/posts", "/replies/post/*").
                 hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
-                .antMatchers("/replies/post", "/posts/suggest", "/reports").
-                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-
-                .antMatchers(HttpMethod.POST, "/posts").
-                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-
-                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
-                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+//                .antMatchers("/replies/post", "/posts/suggest", "/reports").
+//                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+//
+//                .antMatchers("/posts").
+//                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+//
+//                .antMatchers("/categories", "/replies/")
+//                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
                 .anyRequest().authenticated();
 

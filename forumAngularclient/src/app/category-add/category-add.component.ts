@@ -1,5 +1,7 @@
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
+import {Category} from '../_model/category';
+import {CategoryService} from '../_services/category.service';
 
 @Component({
   selector: 'app-category-add',
@@ -7,22 +9,26 @@ import {Component, Inject} from '@angular/core';
   styleUrls: ['./category-add.component.css']
 })
 export class CategoryAddComponent {
-  doAction: boolean;
-  categoryName: string;
-  categoryDescription: string;
+
+  form: any = {};
+  errorMessage = '';
 
   constructor(
-    public dialogRef: MatDialogRef<CategoryAddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string) {
+    private categoryService: CategoryService
+  ) {
   }
 
-  onClick(doAction): void {
-    this.doAction = doAction;
-    this.dialogRef.close({
-      doSend: this.doAction,
-      categoryName: this.categoryName,
-      categoryDescription: this.categoryDescription
+  onSubmit() {
+    this.categoryService.addCategory(this.prepareCategoryRequest()).subscribe(data => {
+      console.log('guguGU');
     });
+  }
+
+  prepareCategoryRequest(): Category {
+    return {
+      name: this.form.categoryName,
+      description: this.form.categoryDescription
+    };
   }
 
 }
