@@ -8,6 +8,7 @@ import org.springframework.context.event.EventListener;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Role;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 
 import java.util.HashSet;
@@ -16,11 +17,14 @@ import java.util.Set;
 @SpringBootApplication
 public class ForumBiznesoweApplication {
 
-	@Autowired
 	RoleRepository roleRepository;
+	UserRepository userRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository) {
+		this.roleRepository = roleRepository;
+		this.userRepository = userRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ForumBiznesoweApplication.class, args);
