@@ -20,8 +20,8 @@ export class PostsService {
     return this.http.get<Post>(API + '?id=' + id);
   }
 
-  public addPost(post: Post) {
-    return this.http.post<Post>(API, post);
+  public addPost(post: Post, idUser: number, categoryName: string) {
+    return this.http.post<Post>(API + '?idUser=' + idUser + '&categoryName=' + categoryName, post);
   }
 
   public updatePost(post: Post) {
@@ -32,8 +32,8 @@ export class PostsService {
     return this.http.delete(API + '?id=' + id);
   }
 
-  public getPostsByCategory(id: number){
-    return this.http.get<Post[]>(API + '/category?id=' + id);
+  public getPostsByCategory(name: string){
+    return this.http.get<Post[]>(API + '/category?name=' + name);
   }
 
 }
