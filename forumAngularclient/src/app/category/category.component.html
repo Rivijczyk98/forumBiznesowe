@@ -3,7 +3,6 @@
       <div  class="post-content">
         <h3 [routerLink]="['/post', post.id]">{{post.title}}</h3>
         <p>{{post.text | postSummary}}</p>
-        ///TODO zmienić na wyświetlanie zgodne z security
         <button (click)="delete(post.id)">Usuń</button>
         <button [routerLink]="['/edytujPost', post.id]">Edytuj</button>
       </div>
@@ -13,3 +12,4 @@
       <button (click)="refreshData()">Odśwież</button>
     </div>
 </div> -->
+<p>categories działa</p>

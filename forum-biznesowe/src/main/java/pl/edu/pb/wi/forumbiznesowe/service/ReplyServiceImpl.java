@@ -8,6 +8,8 @@ import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.ReplyRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
+import pl.edu.pb.wi.forumbiznesowe.service.interfaces.EmailService;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.ReplyService;
 
 import java.util.LinkedList;
@@ -20,10 +22,13 @@ public class ReplyServiceImpl implements ReplyService {
     private ReplyRepository replyRepository;
     private PostRepository postRepository;
 
+    private EmailServiceImpl emailService;
+
     @Autowired
-    public ReplyServiceImpl(ReplyRepository replyRepository, PostRepository postRepository) {
+    public ReplyServiceImpl(ReplyRepository replyRepository, PostRepository postRepository, EmailServiceImpl emailService) {
         this.replyRepository = replyRepository;
         this.postRepository = postRepository;
+        this.emailService = emailService;
     }
 
     @Override
@@ -52,6 +57,10 @@ public class ReplyServiceImpl implements ReplyService {
         if (repliedPostOptional.isPresent()) {
             reply.setPost(repliedPostOptional.get());
             replyRepository.save(reply);
+
+            if(reply.getPost().getIsObserved()){
+                emailService.sendAutomaticGenerated(reply.getPost().getAuthor().getEmail(), reply.getPost().getId());
+            }
 
             return ResponseEntity.ok().body("Reply added successfuly");
         }

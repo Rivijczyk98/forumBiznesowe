@@ -7,6 +7,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Role;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ public class ForumBiznesoweApplication {
 		roleRepository.save(b);
 		roleRepository.save(c);
 		roleRepository.save(d);
-
 
 	}
 
