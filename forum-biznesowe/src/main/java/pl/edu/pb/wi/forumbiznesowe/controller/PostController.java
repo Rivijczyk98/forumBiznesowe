@@ -39,6 +39,11 @@ public class PostController {
         postService.suggest(post);
     }
 
+    @PostMapping("/accept")
+    public void acceptPost(@RequestBody Post post){
+        postService.accept(post);
+    }
+
     @PutMapping
     public void updatePost(@RequestBody Post post) {
         postService.update(post);

@@ -43,6 +43,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public void accept(Post post){
+        post.setStatus(PostStatusEnum.APPROVED);
+        postRepository.save(post);
+    }
+
+    @Override
     public void update(Post post) {
         postRepository.save(post);
     }

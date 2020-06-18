@@ -35,5 +35,4 @@ export class PostsService {
   public getPostsByCategory(id: number){
     return this.http.get<Post[]>(API + '/category?id=' + id);
   }
-
 }
