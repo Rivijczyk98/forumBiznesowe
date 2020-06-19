@@ -2,6 +2,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
@@ -49,6 +50,11 @@ public class PostController {
         postService.update(post);
     }
 
+    @PutMapping("/approve")
+    public void setAsApproved(@RequestBody Post post) {
+        postService.setAsApproved(post);
+    }
+
     @DeleteMapping("/delete")
     public void deletePost(@RequestParam Long id) {
         postService.delete(id);
@@ -58,5 +64,12 @@ public class PostController {
     public void changeIsObserved(@RequestParam Boolean isObserved, @RequestBody Post post) {
         postService.changeIsObserved(isObserved, post);
     }
+
+    @GetMapping("/category-pended")
+    public Iterable<Post> getPendedPosts(){
+        return postService.getPendedPosts();
+    }
+
+    public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}
 
 }

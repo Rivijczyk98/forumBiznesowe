@@ -1,5 +1,7 @@
 package pl.edu.pb.wi.forumbiznesowe.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
@@ -13,6 +15,8 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
+
     private final CategoryRepository categoryRepository;
 
     @Autowired
@@ -22,6 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategories() {
+        logger.info("Zwrócono listę kategorii");
         return categoryRepository.findAll();
     }
 
@@ -31,6 +36,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setName(categoryRequest.getName());
         category.setDescription(categoryRequest.getDescription());
 
+        logger.info("Dodano kategorię");
         categoryRepository.save(category);
     }
 
