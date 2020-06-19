@@ -2,7 +2,6 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 

@@ -70,6 +70,7 @@ public class PostServiceImpl implements PostService {
             }
             post.setAuthor(user.get());
             post.setCategory(category.get());
+            post.setObserved(true);
 
             logger.info("Dodano post");
             postRepository.save(post);
@@ -110,8 +111,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void delete(Long id) {
-        logger.info("Usunięto post");
-        postRepository.deleteById(id);
+        Optional<Post> post = postRepository.findById(id);
+
+        if(post.isPresent()){
+            logger.info("Usunięto post");
+            postRepository.delete(post.get());
+        } else {
+            logger.info("Nie udało się usunąć posta");
+        }
     }
 
     public Iterable<Post> getPostsByCategory(Long id) {

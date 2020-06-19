@@ -34,6 +34,7 @@ export class ReplyService {
   }
 
   public deleteReply(id: number) {
+    console.log(id)
     return this.http.delete(API + '/delete?id=' + id);
   }
 }

@@ -58,8 +58,8 @@ export class ReplyComponent implements OnInit {
   }
 
   delete() {
-    this.replyService.deleteReply(this.reply.id);
-    this.ngOnInit();
+    this.replyService.deleteReply(this.reply.id).subscribe();
+    window.location.reload();
   }
 
 }
