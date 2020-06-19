@@ -17,7 +17,8 @@ import {PostListComponent} from './post-list/post-list.component';
 import {AddPostComponent} from './add-post/add-post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
 import {ReplyComponent} from './reply/reply.component';
-import { PostsPendedListComponent } from './posts-pended-list/posts-pended-list.component';
+import {PostsPendedListComponent} from './posts-pended-list/posts-pended-list.component';
+import {CategoryEditComponent} from './category-edit/category-edit.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PostsPendedListComponent } from './posts-pended-list/posts-pended-list.
     CategoryAddComponent,
     ReplyComponent,
     AddPostComponent,
-    PostsPendedListComponent
+    PostsPendedListComponent,
+    CategoryEditComponent
   ],
   imports: [
     BrowserModule,

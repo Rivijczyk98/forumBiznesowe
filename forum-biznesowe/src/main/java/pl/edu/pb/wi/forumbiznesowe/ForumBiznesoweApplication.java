@@ -39,8 +39,8 @@ public class ForumBiznesoweApplication {
 		SpringApplication.run(ForumBiznesoweApplication.class, args);
 	}
 
-//	@EventListener(ApplicationReadyEvent.class)
-	public void fillDB(){
+	@EventListener(ApplicationReadyEvent.class)
+	public void fillDB() {
 		Role a = new Role(RoleEnum.ROLE_USER);
 		Role b = new Role(RoleEnum.ROLE_VIP);
 		Role c = new Role(RoleEnum.ROLE_MODERATOR);
@@ -51,31 +51,31 @@ public class ForumBiznesoweApplication {
 		roleRepository.save(c);
 		roleRepository.save(d);
 
-		User user = new User("user","user@onet.pl","$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
+		User user = new User("user", "user@onet.pl", "$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
 		Set<Role> userRole = new HashSet<>();
 		userRole.add(a);
 		user.setRoles(userRole);
 		userRepository.save(user);
 
-		User vip = new User("vip","vip@onet.pl","$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
+		User vip = new User("vip", "vip@onet.pl", "$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
 		Set<Role> vipRole = new HashSet<>();
 		vipRole.add(b);
 		vip.setRoles(vipRole);
 		userRepository.save(vip);
 
-		User mod = new User("mod","mod@onet.pl","$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
+		User mod = new User("mod", "mod@onet.pl", "$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
 		Set<Role> modRole = new HashSet<>();
 		modRole.add(c);
 		mod.setRoles(modRole);
 		userRepository.save(mod);
 
-		User admin = new User("admin","admin@onet.pl","$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
+		User admin = new User("admin", "admin@onet.pl", "$2a$10$3ZP90w4a0j7aDReadREEQutjB69O9RPeufNNxZaIszvll.aDlSeI2"); //pass = 123456
 		Set<Role> adminRole = new HashSet<>();
 		adminRole.add(d);
 		admin.setRoles(adminRole);
 		userRepository.save(admin);
 
-		Category category1 = new Category("Programowanie","Zagadnienia objemujące programowanie i tematyki z nim związene");
+		Category category1 = new Category("Programowanie", "Zagadnienia objemujące programowanie i tematyki z nim związene");
 
 		categoryRepository.save(category1);
 

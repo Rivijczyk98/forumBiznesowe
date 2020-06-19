@@ -18,7 +18,6 @@ public class Category {
     private Long id;
 
     @NotBlank
-    @Column(unique = true)
     private String name;
 
     private String description;
