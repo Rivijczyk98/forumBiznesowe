@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../_services/category.service';
 import {Category} from '../_model/category';
@@ -26,6 +25,12 @@ export class HomeComponent implements OnInit {
   private refreshData() {
     this.categoryService.findAll().subscribe(data => {
       this.categories = data;
+    });
+  }
+
+  deleteCategory(id: number) {
+    this.categoryService.deleteCategory(id).subscribe(() => {
+      this.refreshData();
     });
   }
 }

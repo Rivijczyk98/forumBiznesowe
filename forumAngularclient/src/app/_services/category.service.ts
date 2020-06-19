@@ -25,4 +25,14 @@ export class CategoryService {
     return this.http.post<Category>(API + '/add', category);
   }
 
+  public updateCategory(category: any) {
+    console.log(category);
+    return this.http.put<Category>(API + '/edit', category);
+  }
+
+  public deleteCategory(id: number) {
+    console.log('url:', API + '/delete?id=' + id);
+    return this.http.delete(API + '/delete?id=' + id);
+  }
+
 }

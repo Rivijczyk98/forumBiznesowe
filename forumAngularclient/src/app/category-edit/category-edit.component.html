@@ -1,13 +1,12 @@
 <form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="box" name="form" novalidate>
-  <h1>Nowa kategoria</h1>
+  <h1>Edytuj kategorię</h1>
   <div>
     <label for="categoryName"></label>
     <input
       #categoryName="ngModel"
-      [(ngModel)]="form.categoryName"
+      [(ngModel)]="editedCategory.name"
       id="categoryName"
       name="categoryName"
-      placeholder="Nazwa kategorii"
       required
       type="text"
     />
@@ -17,10 +16,9 @@
     <label for="categoryDescription"></label>
     <textarea
       #password="ngModel"
-      [(ngModel)]="form.categoryDescription"
+      [(ngModel)]="editedCategory.description"
       id="categoryDescription"
       name="categoryDescription"
-      placeholder="Opis kategorii"
       type="text"
     ></textarea>
   </div>

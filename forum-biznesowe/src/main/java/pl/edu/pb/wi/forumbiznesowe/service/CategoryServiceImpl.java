@@ -15,9 +15,8 @@ import java.util.Optional;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
-
     private final CategoryRepository categoryRepository;
+    Logger logger = LoggerFactory.getLogger(CategoryServiceImpl.class);
 
     @Autowired
     public CategoryServiceImpl(CategoryRepository categoryRepository) {
@@ -44,18 +43,28 @@ public class CategoryServiceImpl implements CategoryService {
     public void deleteCategory(Long id) {
         Optional<Category> category = categoryRepository.findById(id);
 
-        if(category.isPresent()){
+        if (category.isPresent()) {
             categoryRepository.delete(category.get());
             System.out.println("Pomyślnie usunięto kategorię");
-        }
-        else {
+        } else {
             System.out.println("Nie znaleziono kategorii poprzez id");
         }
     }
 
     @Override
     public void updateCategory(Category category) {
-        categoryRepository.save(category);
+        if (find(category.getId()).isPresent()) {
+            Category p = find(category.getId()).get();
+            p.setDescription(category.getDescription());
+            p.setName(category.getName());
+            categoryRepository.save(p);
+        }
+    }
+
+    @Override
+    public Optional<Category> find(Long id) {
+        logger.info("Zwrócono kategorię");
+        return categoryRepository.findById(id);
     }
 
     public Category findById(Long id) {
