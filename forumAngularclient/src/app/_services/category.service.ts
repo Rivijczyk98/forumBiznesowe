@@ -25,4 +25,9 @@ export class CategoryService {
     return this.http.post<Category>(API + '/add', category);
   }
 
+  public deleteCategory(id: number) {
+    console.log('url:', API + '/delete?id=' + id);
+    return this.http.delete(API + '/delete?id=' + id);
+  }
+
 }

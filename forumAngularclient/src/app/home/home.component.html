@@ -10,7 +10,9 @@
       </td>
       <td>
         <button *ngIf="authService.isModeratorLoggedIn()" class="admin-panel-button" routerLink="new">Edytuj</button>
-        <button *ngIf="authService.isModeratorLoggedIn()" class="admin-panel-button" routerLink="new">Usuń</button>
+        <button (click)="deleteCategory(category.id)" *ngIf="authService.isModeratorLoggedIn()"
+                class="admin-panel-button">Usuń
+        </button>
       </td>
     </tr>
     </tbody>
