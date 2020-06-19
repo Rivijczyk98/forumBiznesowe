@@ -56,7 +56,7 @@ export class PostComponent implements OnInit {
   async reply() {
     const newReply: Reply = new Reply(this.tokenService.getUser().id, this.form.text, this.post.id, new Date());
     await this.replyService.addReply(newReply).subscribe(res => {
-      
+
     });
 
     window.location.reload();
@@ -69,9 +69,9 @@ export class PostComponent implements OnInit {
 
   delete() {
     const categoryID: number = this.post.category.id;
-    this.postService.deletePost(this.post.id);
+    this.postService.deletePost(this.post.id).subscribe();
 
-    this.router.navigateByUrl('/category?id=' + categoryID);
+    this.router.navigateByUrl('/categories/' + categoryID);
   }
 
   isLoggedIn() {
