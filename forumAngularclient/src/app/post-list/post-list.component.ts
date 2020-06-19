@@ -4,6 +4,7 @@ import {Post} from '../_model/post';
 import {ActivatedRoute} from '@angular/router';
 import {CategoryService} from '../_services/category.service';
 import {Category} from '../_model/category';
+import {AuthService} from '../_services/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -20,7 +21,8 @@ export class PostListComponent implements OnInit {
   constructor(
     private postService: PostService,
     private categoryService: CategoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public authService: AuthService
   ) {
   }
 

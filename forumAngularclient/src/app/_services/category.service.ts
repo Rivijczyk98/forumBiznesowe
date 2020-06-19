@@ -14,7 +14,7 @@ export class CategoryService {
   }
 
   public findAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(API);
+    return this.http.get<Category[]>(API + '/all');
   }
 
   public findById(id: number): Observable<Category> {
@@ -22,7 +22,7 @@ export class CategoryService {
   }
 
   public addCategory(category: any) {
-    return this.http.post<Category>(API, category);
+    return this.http.post<Category>(API + '/add', category);
   }
 
 }

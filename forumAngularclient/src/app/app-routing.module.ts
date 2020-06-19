@@ -20,12 +20,13 @@ const routes: Routes = [
   {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'post/:id', component: PostComponent, pathMatch: 'full'},
   {path: 'addpost/:id', component: AddPostComponent, pathMatch: 'full'},
-  { path: 'posts_pended', component: PostsPendedListComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}
+  {path: 'posts_pended', component: PostsPendedListComponent},
+  {path: '', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

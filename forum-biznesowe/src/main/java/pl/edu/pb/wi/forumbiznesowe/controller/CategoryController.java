@@ -21,13 +21,13 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categoryList = categoryService.getAllCategories();
         return ResponseEntity.ok(categoryList);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Object> createCategory(@RequestBody CategoryRequest categoryRequest) {
         categoryService.saveCategory(categoryRequest);
         return ResponseEntity.ok().build();

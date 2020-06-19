@@ -25,11 +25,10 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/find")
+    @GetMapping
     public User findUser(@RequestParam Long id) {
         return userService.findById(id);
     }
-
 
     @GetMapping("/username")
     public UsernameResponse getUsername(@RequestParam Long id){
@@ -41,7 +40,7 @@ public class UserController {
         return userService.save(user);
     }
 
-    @PatchMapping("/giveRole")
+    @PatchMapping("/give")
     public User giveRole(@RequestBody User user, @RequestParam String role){
         return userService.giveRole(user, role);
     }

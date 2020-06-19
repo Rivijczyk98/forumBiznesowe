@@ -53,8 +53,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void add(Post post, long idUser, String categoryName) {
-        Optional<Category> category = categoryRepository.findByName(categoryName);
+    public void add(Post post, long idUser, Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
         Optional<User> user = userRepository.findById(idUser);
 
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
@@ -80,7 +80,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void accept(Post post){
+    public void accept(Post post) {
         post.setStatus(PostStatusEnum.APPROVED);
         postRepository.save(post);
     }
@@ -114,7 +114,7 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
-    public Iterable<Post> getPostsByCategory(Long id){
+    public Iterable<Post> getPostsByCategory(Long id) {
         Iterable<Post> list = findAll();
         LinkedList<Post> newList = new LinkedList<>();
         for(Post p : list){
@@ -141,15 +141,20 @@ public class PostServiceImpl implements PostService {
         return newList;
     }
 
-
-
-    public void changeIsObserved(Long id){
-        if(find(id).isPresent()){
+    public void changeIsObserved(Long id) {
+        if (find(id).isPresent()) {
             Post post = find(id).get();
             post.setObserved(!post.getIsObserved());
             postRepository.save(post);
         }
         logger.info("Post dodano do obserwowanych");
+    }
+
+    public void changeIsObserved(Boolean isObserved, Post post) {
+        if (find(post.getId()).isPresent()) {
+            post.setObserved(isObserved);
+            postRepository.save(post);
+        }
     }
 
 }
