@@ -14,7 +14,8 @@
       <a routerLink="login" class="menu-button right" *ngIf="!isLoggedIn">LOGOWANIE</a>
       <a routerLink="register" class="menu-button right" *ngIf="!isLoggedIn">REJESTRACJA</a>
       <a routerLink="admin_panel" class="menu-button right" *ngIf="adminLogged">PANEL ADMINISTRATORA</a>
-      <a routerLink="posts_pended" class="menu-button right" *ngIf="adminLogged || moderatorLogged">POSTY OCZEKUJĄCE</a>
+      <a *ngIf="authService.isModeratorLoggedIn()" class="menu-button right" routerLink="posts_pended">POSTY
+        OCZEKUJĄCE</a>
       <a class="menu-button right" *ngIf="isLoggedIn">{{ username }}</a>
     </div>
   </div>

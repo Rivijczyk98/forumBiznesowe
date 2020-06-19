@@ -15,6 +15,7 @@ export class AddPostComponent implements OnInit {
 
   post: Post = new Post();
   category: Category = new Category();
+  categoryId: number;
 
   currentUser: any;
 
@@ -30,21 +31,26 @@ export class AddPostComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
 
-    this.route.paramMap.subscribe(() => {
-      this.category = this.route.snapshot.params.category;
+    this.route.paramMap.subscribe(params => {
+      this.categoryId = +params.get('id');
     });
 
-    this.categoryService.findById(this.category.id).subscribe(category => {
+    // this.route.paramMap.subscribe(() => {
+    //   this.category = this.route.snapshot.params.category;
+    // });
+
+    this.categoryService.findById(this.categoryId).subscribe(category => {
       this.category = category;
     });
   }
 
   onSubmit() {
-    this.postService.addPost(this.post, this.currentUser.id, this.category.id).subscribe(() => this.goToPostsList());
+    console.log('this.category', this.category);
+    this.postService.addPost(this.post, this.currentUser.id, this.categoryId).subscribe(() => this.goToPostsList());
   }
 
   goToPostsList() {
-    this.router.navigate(['/posts/' + this.category]);
+    this.router.navigate(['/categories/' + this.category.id]);
   }
 
 }

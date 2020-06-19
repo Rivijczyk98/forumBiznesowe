@@ -53,8 +53,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void add(Post post, long idUser, String categoryName) {
-        Optional<Category> category = categoryRepository.findByName(categoryName);
+    public void add(Post post, long idUser, Long categoryId) {
+        Optional<Category> category = categoryRepository.findById(categoryId);
         Optional<User> user = userRepository.findById(idUser);
 
         Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);

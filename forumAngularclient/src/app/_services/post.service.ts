@@ -22,7 +22,7 @@ export class PostService {
   }
 
   public addPost(post: Post, idUser: number, id: number) {
-    return this.http.post<Post>(API + 'add?idUser=' + idUser + '&categoryId=' + id, post);
+    return this.http.post<Post>(API + '/add?idUser=' + idUser + '&categoryId=' + id, post);
   }
 
   public updatePost(post: Post) {
@@ -40,7 +40,7 @@ export class PostService {
   }
 
   public deletePost(id: number) {
-    return this.http.delete(API + 'delete?id=' + id);
+    return this.http.delete(API + '/delete?id=' + id);
   }
 
   public getPostsByCategory(id: number) {
