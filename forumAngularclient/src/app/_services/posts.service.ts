@@ -33,7 +33,7 @@ export class PostsService {
   }
 
   public deletePost(id: number) {
-    return this.http.delete(API + '?id=' + id);
+    return this.http.delete(API + '/delete?id=' + id);
   }
 
   public getPostsByCategory(name: string){
@@ -43,5 +43,4 @@ export class PostsService {
   public getPendedPosts(){
     return this.http.get<Post[]>(API + '/category-pended');
   }
-
 }

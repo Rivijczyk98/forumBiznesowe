@@ -11,10 +11,10 @@ export class UserguardService implements CanActivate{
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    if (this.authService.isUserLoggedIn())
+    if (this.authService.isUserLoggedIn() || this.authService.isModeratorLoggedIn() || this.authService.isAdminLoggedIn())
       return true;
 
-    this.router.navigate(['home']);
+    this.router.navigate(['categories']);
     return false;
   }
 }
