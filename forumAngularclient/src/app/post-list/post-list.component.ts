@@ -13,7 +13,7 @@ import {Category} from '../_model/category';
 export class PostListComponent implements OnInit {
 
   categoryId: number;
-  category: Category;
+  category: Category = null;
   posts: Post[] = [];
 
   constructor(
@@ -24,8 +24,8 @@ export class PostListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(() => {
-      this.categoryId = this.route.snapshot.params.id;
+    this.route.paramMap.subscribe(params => {
+      this.categoryId = +params.get('id');
     });
 
     this.postService.getPostsByCategory(this.categoryId).subscribe(posts => {

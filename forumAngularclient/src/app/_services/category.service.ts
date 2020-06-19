@@ -18,7 +18,7 @@ export class CategoryService {
   }
 
   public findById(id: number): Observable<Category> {
-    return this.http.get<Category>(API + '?id=' + id);
+    return this.http.get<Category>(API + '/find?id=' + id);
   }
 
   public addCategory(category: any) {

@@ -5,10 +5,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.Category;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Role;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
+import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
 
 import java.util.HashSet;
@@ -19,11 +24,15 @@ public class ForumBiznesoweApplication {
 
 	RoleRepository roleRepository;
 	UserRepository userRepository;
+	CategoryRepository categoryRepository;
+	PostRepository postRepository;
 
 	@Autowired
-	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository) {
+	public ForumBiznesoweApplication(RoleRepository roleRepository, UserRepository userRepository, CategoryRepository categoryRepository, PostRepository postRepository) {
 		this.roleRepository = roleRepository;
 		this.userRepository = userRepository;
+		this.categoryRepository = categoryRepository;
+		this.postRepository = postRepository;
 	}
 
 	public static void main(String[] args) {
@@ -65,6 +74,16 @@ public class ForumBiznesoweApplication {
 		adminRole.add(d);
 		admin.setRoles(adminRole);
 		userRepository.save(admin);
+
+		Category category1 = new Category("Programowanie","Zagadnienia objemujące programowanie i tematyki z nim związene");
+
+		categoryRepository.save(category1);
+
+		Post post1 = new Post(user, category1, "Zmienne w Javie", "Mógłby mi ktoś wymienić wszystkie zmienne jakie występują w Javie?", PostStatusEnum.PENDING);
+		Post post2 = new Post(vip, category1, "Java - typy zmiennoprzecinkowe", "Jakie są typy zmiennoprzycinkowe w Javie?", PostStatusEnum.APPROVED);
+
+		postRepository.save(post1);
+		postRepository.save(post2);
 
 	}
 

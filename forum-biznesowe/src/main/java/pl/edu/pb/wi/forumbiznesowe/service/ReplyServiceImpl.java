@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.ReplyRepository;
+import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Reply;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
+import pl.edu.pb.wi.forumbiznesowe.pojo.ReplyRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.EmailService;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.ReplyService;
 
@@ -21,13 +23,14 @@ public class ReplyServiceImpl implements ReplyService {
 
     private ReplyRepository replyRepository;
     private PostRepository postRepository;
-
+    private UserRepository userRepository;
     private EmailServiceImpl emailService;
 
     @Autowired
-    public ReplyServiceImpl(ReplyRepository replyRepository, PostRepository postRepository, EmailServiceImpl emailService) {
+    public ReplyServiceImpl(ReplyRepository replyRepository, PostRepository postRepository, UserRepository userRepository, EmailServiceImpl emailService) {
         this.replyRepository = replyRepository;
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
         this.emailService = emailService;
     }
 
@@ -51,20 +54,25 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public ResponseEntity<Object> addReply(Long postId, Reply reply) {
-        Optional<Post> repliedPostOptional = postRepository.findById(postId);
+    public Reply addReply(ReplyRequest reply) {
+        Optional<Post> repliedPostOptional = postRepository.findById(reply.getPost());
+        Optional<User> userOptional = userRepository.findById(reply.getAuthor());
 
-        if (repliedPostOptional.isPresent()) {
-            reply.setPost(repliedPostOptional.get());
-            replyRepository.save(reply);
+        Reply r = new Reply();
+        r.setText(reply.getText());
 
-            if(reply.getPost().getIsObserved()){
-                emailService.sendAutomaticGenerated(reply.getPost().getAuthor().getEmail(), reply.getPost().getId());
+        if (repliedPostOptional.isPresent() && userOptional.isPresent()) {
+            r.setPost(repliedPostOptional.get());
+            r.setAuthor(userOptional.get());
+            replyRepository.save(r);
+
+            if(r.getPost().getIsObserved()){
+                emailService.sendAutomaticGenerated(r.getPost().getAuthor().getEmail(), r.getPost().getId());
             }
 
-            return ResponseEntity.ok().body("Reply added successfuly");
+            return r;
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Post with id " + postId + " not found");
+        return null;
     }
 
     @Override
