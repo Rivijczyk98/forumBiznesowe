@@ -15,7 +15,7 @@ import {AuthService} from '../_services/auth.service';
 export class PostListComponent implements OnInit {
 
   categoryId: number;
-  category: Category = null;
+  category: Category = new Category();
   posts: Post[] = [];
 
   constructor(

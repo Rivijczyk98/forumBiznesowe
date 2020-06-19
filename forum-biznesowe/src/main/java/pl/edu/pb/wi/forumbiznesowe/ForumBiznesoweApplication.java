@@ -39,11 +39,11 @@ public class ForumBiznesoweApplication {
 		SpringApplication.run(ForumBiznesoweApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
+//	@EventListener(ApplicationReadyEvent.class)
 	public void fillDB(){
 		Role a = new Role(RoleEnum.ROLE_USER);
-		Role b = new Role(RoleEnum.ROLE_MODERATOR);
-		Role c = new Role(RoleEnum.ROLE_VIP);
+		Role b = new Role(RoleEnum.ROLE_VIP);
+		Role c = new Role(RoleEnum.ROLE_MODERATOR);
 		Role d = new Role(RoleEnum.ROLE_ADMIN);
 
 		roleRepository.save(a);

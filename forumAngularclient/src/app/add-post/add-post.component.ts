@@ -14,7 +14,6 @@ import {Category} from '../_model/category';
 export class AddPostComponent implements OnInit {
 
   post: Post = new Post();
-  category: Category = new Category();
   categoryId: number;
 
   currentUser: any;
@@ -24,7 +23,6 @@ export class AddPostComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tokenStorageService: TokenStorageService,
-    private categoryService: CategoryService
   ) {
   }
 
@@ -34,23 +32,14 @@ export class AddPostComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.categoryId = +params.get('id');
     });
-
-    // this.route.paramMap.subscribe(() => {
-    //   this.category = this.route.snapshot.params.category;
-    // });
-
-    this.categoryService.findById(this.categoryId).subscribe(category => {
-      this.category = category;
-    });
   }
 
   onSubmit() {
-    console.log('this.category', this.category);
     this.postService.addPost(this.post, this.currentUser.id, this.categoryId).subscribe(() => this.goToPostsList());
   }
 
   goToPostsList() {
-    this.router.navigate(['/categories/' + this.category.id]);
+    this.router.navigate(['/categories/' + this.categoryId]);
   }
 
 }
