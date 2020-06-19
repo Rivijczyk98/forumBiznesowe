@@ -26,14 +26,14 @@ export class ReplyService {
   }
 
   public addReply(reply: Reply) {
-    return this.http.post<Reply>(API, reply);
+    return this.http.post<Reply>(API + '/add', reply);
   }
 
   public updateReply(reply: Reply) {
-    return this.http.put<Reply>(API, reply);
+    return this.http.put<Reply>(API + '/update', reply);
   }
 
   public deleteReply(id: number) {
-    return this.http.delete(API + '?id=' + id);
+    return this.http.delete(API + '/delete?id=' + id);
   }
 }

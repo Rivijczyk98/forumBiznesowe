@@ -22,11 +22,11 @@ export class PostService {
   }
 
   public addPost(post: Post, idUser: number, categoryName: string) {
-    return this.http.post<Post>(API + '?idUser=' + idUser + '&categoryName=' + categoryName, post);
+    return this.http.post<Post>(API + 'add?idUser=' + idUser + '&categoryName=' + categoryName, post);
   }
 
   public updatePost(post: Post) {
-    return this.http.put<Post>(API,
+    return this.http.put<Post>(API + '/update',
       {
         id: post.id,
         author: post.author.id,
@@ -40,15 +40,16 @@ export class PostService {
   }
 
   public deletePost(id: number) {
-    return this.http.delete(API + '?id=' + id);
+    return this.http.delete(API + 'delete?id=' + id);
   }
 
   public getPostsByCategory(id: number) {
     return this.http.get<Post[]>(API + '/category?id=' + id);
   }
 
+
   public changeIsObserved(isOb: boolean, post: Post) {
-    return this.http.patch<Post>(API + '/observed?value=' + isOb, post);
+    return this.http.patch<Post>(API + '/observed?id=' + isOb, post);
   }
 
 }

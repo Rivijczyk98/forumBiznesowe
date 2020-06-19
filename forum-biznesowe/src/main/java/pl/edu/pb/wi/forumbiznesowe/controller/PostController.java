@@ -20,7 +20,7 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    public Iterable<Post> getAll(){
+    public Iterable<Post> getAll() {
         return postService.findAll();
     }
 
@@ -29,36 +29,34 @@ public class PostController {
         return postService.find(id);
     }
 
-    @PostMapping
+    @GetMapping("/category")
+    public Iterable<Post> getPostsByCategory(@RequestParam Long id) {
+        return postService.getPostsByCategory(id);
+    }
+
+    @PostMapping("/add")
     public void addPost(@RequestBody Post post) {
         postService.add(post);
     }
 
-    @PostMapping("/suggest")
-    public void suggestPost(@RequestBody Post post) {
-        postService.suggest(post);
-    }
-
     @PostMapping("/accept")
-    public void acceptPost(@RequestBody Post post){
+    public void acceptPost(@RequestBody Post post) {
         postService.accept(post);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public void updatePost(@RequestBody Post post) {
         postService.update(post);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public void deletePost(@RequestParam Long id) {
         postService.delete(id);
     }
 
-    @GetMapping("/category")
-    public Iterable<Post> getPostsByCategory(@RequestParam Long id){
-        return postService.getPostsByCategory(id);
+    @PatchMapping("/observed")
+    public void changeIsObserved(@RequestParam Boolean isObserved, @RequestBody Post post) {
+        postService.changeIsObserved(isObserved, post);
     }
-
-    public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}
 
 }

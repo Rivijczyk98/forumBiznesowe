@@ -33,7 +33,6 @@ export class AddPostComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.post);
     this.postService.addPost(this.post, this.currentUser.id, this.category).subscribe(() => this.goToPostsList());
   }
 

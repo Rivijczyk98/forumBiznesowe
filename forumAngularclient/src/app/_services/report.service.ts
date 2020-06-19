@@ -11,6 +11,5 @@ export class ReportService {
   }
 
   addReport(report: Report) {
-
   }
 }

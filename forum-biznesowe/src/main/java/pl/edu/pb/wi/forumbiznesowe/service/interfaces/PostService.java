@@ -22,4 +22,6 @@ public interface PostService {
 
     void accept(Post post);
 
+    void changeIsObserved(Boolean isObserved, Post post);
+
 }

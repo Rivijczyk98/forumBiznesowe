@@ -35,17 +35,17 @@ public class ReplyController {
         return replyServiceImpl.findByPostId(id);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Reply addReply(@RequestBody ReplyRequest reply) {
         return replyServiceImpl.addReply(reply);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public void updateReply(@RequestBody Reply reply){
         replyServiceImpl.updateReply(reply);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/delete")
     public void deleteReply(@RequestParam Long id){
         replyServiceImpl.deleteReply(id);
     }

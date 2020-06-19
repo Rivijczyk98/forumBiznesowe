@@ -43,7 +43,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void accept(Post post){
+    public void accept(Post post) {
         post.setStatus(PostStatusEnum.APPROVED);
         postRepository.save(post);
     }
@@ -63,21 +63,28 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
-    public Iterable<Post> getPostsByCategory(Long id){
+    public Iterable<Post> getPostsByCategory(Long id) {
         Iterable<Post> list = findAll();
         LinkedList<Post> newList = new LinkedList<>();
-        for(Post p : list){
-            if(p.getCategory().getId().equals(id)){
+        for (Post p : list) {
+            if (p.getCategory().getId().equals(id)) {
                 newList.add(p);
             }
         }
         return newList;
     }
 
-    public void changeIsObserved(Long id){
-        if(find(id).isPresent()){
+    public void changeIsObserved(Long id) {
+        if (find(id).isPresent()) {
             Post post = find(id).get();
             post.setObserved(!post.getIsObserved());
+            postRepository.save(post);
+        }
+    }
+
+    public void changeIsObserved(Boolean isObserved, Post post) {
+        if (find(post.getId()).isPresent()) {
+            post.setObserved(isObserved);
             postRepository.save(post);
         }
     }

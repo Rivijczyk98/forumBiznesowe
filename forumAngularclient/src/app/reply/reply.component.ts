@@ -17,7 +17,7 @@ export class ReplyComponent implements OnInit {
 
   reply: Reply = null;
   post: Post = new Post();
-  username: string = "";
+  username: string = '';
 
   reporting: boolean = false;
 
@@ -32,7 +32,6 @@ export class ReplyComponent implements OnInit {
     this.reply = this.object.reply;
     this.post = this.object.post;
 
-    console.log(this.reply)
     this.userService.getUsername(this.reply.author).subscribe(u => {
       this.username = u.username;
     });
