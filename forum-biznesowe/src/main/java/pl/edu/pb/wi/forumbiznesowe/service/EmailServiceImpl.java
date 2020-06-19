@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailService {
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setTo(receiver);
         mail.setSubject("You got replay to your Post!");
-        mail.setText("You've got an replay on your post: http:/localhost:4200/post?id=" + postID + " ! Check it, it may be important!\nBest regards from Forum Biznesowa Team");
+        mail.setText("You've got an replay on your post: http:/localhost:4200/post/" + postID + " ! Check it, it may be important!\nBest regards from Forum Biznesowa Team");
 
         logger.info("Wysłano email");
         emailSender.send(mail);
