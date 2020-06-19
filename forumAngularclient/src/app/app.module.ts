@@ -17,7 +17,7 @@ import {PostListComponent} from './post-list/post-list.component';
 import {AddPostComponent} from './add-post/add-post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
 import {ReplyComponent} from './reply/reply.component';
-
+import { PostsPendedListComponent } from './posts-pended-list/posts-pended-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,8 @@ import {ReplyComponent} from './reply/reply.component';
     AddPostComponent,
     CategoryAddComponent,
     ReplyComponent,
+    AddPostComponent,
+    PostsPendedListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,5 +46,4 @@ import {ReplyComponent} from './reply/reply.component';
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

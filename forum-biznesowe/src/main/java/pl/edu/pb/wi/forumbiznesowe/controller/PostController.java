@@ -2,6 +2,7 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
@@ -30,23 +31,18 @@ public class PostController {
     }
 
     @PostMapping
-    public void addPost(@RequestBody Post post) {
-        postService.add(post);
-    }
-
-    @PostMapping("/suggest")
-    public void suggestPost(@RequestBody Post post) {
-        postService.suggest(post);
-    }
-
-    @PostMapping("/accept")
-    public void acceptPost(@RequestBody Post post){
-        postService.accept(post);
+    public void addPost(@RequestBody Post post, @RequestParam long idUser, @RequestParam String categoryName) {
+        postService.add(post, idUser, categoryName);
     }
 
     @PutMapping
     public void updatePost(@RequestBody Post post) {
         postService.update(post);
+    }
+
+    @PutMapping("/approve")
+    public void setAsApproved(@RequestBody Post post) {
+        postService.setAsApproved(post);
     }
 
     @DeleteMapping
@@ -57,6 +53,11 @@ public class PostController {
     @GetMapping("/category")
     public Iterable<Post> getPostsByCategory(@RequestParam Long id){
         return postService.getPostsByCategory(id);
+    }
+
+    @GetMapping("/category-pended")
+    public Iterable<Post> getPendedPosts(){
+        return postService.getPendedPosts();
     }
 
     public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}

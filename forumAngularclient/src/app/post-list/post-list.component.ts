@@ -10,6 +10,7 @@ import {Category} from '../_model/category';
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
+
 export class PostListComponent implements OnInit {
 
   categoryId: number;

@@ -34,10 +34,7 @@ export class UserService {
   }
 */
 
-  // TODO przenieść trzy metody zmiany roli do jednej
   public giveRole(user: User, role: string) {
-    console.log(role);
-    console.log(user);
     return this.http.patch<User>(this.giveRoleUrl + '?role=' + role, user);
   }
 

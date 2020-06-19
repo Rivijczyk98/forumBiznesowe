@@ -62,18 +62,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/*").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
+                .antMatchers(HttpMethod.GET, "/categories",  "/posts", "/posts/*", "/replies/post/*").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue())
 
-                .antMatchers("/replies/post", "/posts/suggest", "/reports", "/posts").
-                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+                .antMatchers(HttpMethod.POST, "/replies/post", "/posts/suggest", "/reports").
+                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue())
 
                 .antMatchers(HttpMethod.POST, "/posts").
-                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+                hasAnyAuthority(ROLE_USER.getValue(),ROLE_VIP.getValue(),ROLE_MODERATOR.getValue(),ROLE_ADMIN.getValue())
 
-                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
-                .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+                .antMatchers("/categories/*", "/posts/*", "/replies/*")
+                .hasAuthority(ROLE_MODERATOR.getValue())
+
+                .antMatchers("/categories/*", "/posts/*", "/replies/*", "/reports/*", "/users/*")
+                .hasAuthority(ROLE_ADMIN.getValue())
+
+                .antMatchers(HttpMethod.GET, "/categories",  "/posts", "/posts/*", "/replies/post/*", "/users/*").
+                hasAnyAuthority(ROLE_ADMIN.getValue(), ROLE_MODERATOR.getValue())
 
                 .anyRequest().authenticated();
 

@@ -9,6 +9,7 @@ import {PostComponent} from './post/post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
 import {PostListComponent} from './post-list/post-list.component';
 import {AddPostComponent} from './add-post/add-post.component';
+import {PostsPendedListComponent} from './posts-pended-list/posts-pended-list.component';
 
 const routes: Routes = [
   {path: 'categories', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'post/:id', component: PostComponent, pathMatch: 'full'},
   {path: 'addpost/:id', component: AddPostComponent, pathMatch: 'full'},
+  { path: 'posts_pended', component: PostsPendedListComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
@@ -26,5 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }
