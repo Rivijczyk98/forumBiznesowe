@@ -4,7 +4,6 @@ package pl.edu.pb.wi.forumbiznesowe.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -62,18 +61,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/*").permitAll()
 
-                .antMatchers(HttpMethod.GET, "/categories", "/replies", "/replies/**", "/posts", "/posts/**", "/users/username").permitAll()
+                .antMatchers("/categories/all", "/categories/find",
+                        "/posts/all", "/posts", "/posts/category", "/posts/add", "/posts/update", "/posts/delete",
+                        "/replies/*", "/replies",
+                        "/users/username", "/users")
+                .hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
-                .antMatchers("/replies/post", "/posts/suggest", "/reports", "/posts").
-                hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+                .antMatchers("/reports/add",
+                        "/posts/observed")
+                .hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
 
-                .antMatchers(HttpMethod.POST, "/posts").
-                hasAnyAuthority(ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
-
-                .antMatchers(HttpMethod.POST, "/categories", "/replies/")
+                .antMatchers("/categories/add", "/categories/edit", "/categories/delete",
+                        "/posts/accept",
+                        "/reports", "/reports/all")
                 .hasAnyAuthority(ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())
+
+                .antMatchers("/users/*", "/users")
+                .hasAuthority(ROLE_ADMIN.getValue())
 
                 .anyRequest().authenticated();
 
