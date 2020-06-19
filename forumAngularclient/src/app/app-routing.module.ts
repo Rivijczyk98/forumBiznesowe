@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'post/:id', component: PostComponent, pathMatch: 'full'},
   {path: 'addpost/:id', component: AddPostComponent, pathMatch: 'full'},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}
+  {path: '', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
 @NgModule({

@@ -17,7 +17,8 @@ public class PostRequest {
     String status;
     Date postedDate;
 
-    public PostRequest(Long id, Long author, Long category, String title, String text, boolean isObserved, String status, Date postedDate) {
+    public PostRequest(Long id, Long author, Long category, String title, String text,
+                       boolean isObserved, String status, Date postedDate) {
         this.id = id;
         this.author = author;
         this.category = category;

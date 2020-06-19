@@ -3,6 +3,8 @@ import {PostService} from '../_services/post.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Post} from '../_model/post';
 import {TokenStorageService} from '../_services/token-storage.service';
+import {CategoryService} from '../_services/category.service';
+import {Category} from '../_model/category';
 
 @Component({
   selector: 'app-add-post',
@@ -12,7 +14,7 @@ import {TokenStorageService} from '../_services/token-storage.service';
 export class AddPostComponent implements OnInit {
 
   post: Post = new Post();
-  category: string;
+  category: Category = new Category();
 
   currentUser: any;
 
@@ -20,7 +22,8 @@ export class AddPostComponent implements OnInit {
     private postService: PostService,
     private route: ActivatedRoute,
     private router: Router,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private categoryService: CategoryService
   ) {
   }
 
@@ -30,10 +33,14 @@ export class AddPostComponent implements OnInit {
     this.route.paramMap.subscribe(() => {
       this.category = this.route.snapshot.params.category;
     });
+
+    this.categoryService.findById(this.category.id).subscribe(category => {
+      this.category = category;
+    });
   }
 
   onSubmit() {
-    this.postService.addPost(this.post, this.currentUser.id, this.category).subscribe(() => this.goToPostsList());
+    this.postService.addPost(this.post, this.currentUser.id, this.category.id).subscribe(() => this.goToPostsList());
   }
 
   goToPostsList() {

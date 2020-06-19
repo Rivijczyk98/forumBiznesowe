@@ -61,10 +61,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
 
-                .antMatchers("/auth/*").permitAll()
+                .antMatchers("/auth/*",
+                        "/categories/all", "/categories/find",
+                        "/posts/all", "/posts", "/posts/category",
+                        "/replies", "/replies/post",
+                        "/users/username").permitAll()
 
-                .antMatchers("/categories/all", "/categories/find",
-                        "/posts/all", "/posts", "/posts/category", "/posts/add", "/posts/update", "/posts/delete",
+                .antMatchers("/posts/add", "/posts/update", "/posts/delete",
                         "/replies/*", "/replies",
                         "/users/username", "/users")
                 .hasAnyAuthority(ROLE_USER.getValue(), ROLE_VIP.getValue(), ROLE_MODERATOR.getValue(), ROLE_ADMIN.getValue())

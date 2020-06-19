@@ -31,9 +31,30 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void add(Post post) {
-        post.setStatus(PostStatusEnum.APPROVED);
-        postRepository.save(post);
+    public void add(Post post, long idUser, String categoryName) {
+        Optional<Category> category = categoryRepository.findByName(categoryName);
+        Optional<User> user = userRepository.findById(idUser);
+
+        Optional<Role> userRole = roleRepository.findByName(RoleEnum.ROLE_USER);
+
+        if (user.isPresent() && category.isPresent() && userRole.isPresent()) {
+
+            if (user.get().getRoles().contains(userRole.get())) {
+                logger.info("Post będzie oczekiwał na zatwierdzenie");
+                post.setStatus(PostStatusEnum.PENDING);
+            } else {
+                logger.info("Post nie wymaga zatwierdzenia");
+                post.setStatus(PostStatusEnum.APPROVED);
+            }
+            post.setAuthor(user.get());
+            post.setCategory(category.get());
+
+            logger.info("Dodano post");
+            postRepository.save(post);
+
+        } else {
+            logger.error("Nie znaleziono użytkownika lub kategorii");
+        }
     }
 
     @Override

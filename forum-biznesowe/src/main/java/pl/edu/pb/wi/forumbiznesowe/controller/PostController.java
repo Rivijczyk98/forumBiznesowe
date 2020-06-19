@@ -35,8 +35,8 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    public void addPost(@RequestBody Post post) {
-        postService.add(post);
+    public void addPost(@RequestBody Post post, @RequestParam Long idUser, @RequestParam Long categoryId) {
+        postService.add(post, idUser, categoryId);
     }
 
     @PostMapping("/accept")
