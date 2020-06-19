@@ -1,59 +1,37 @@
-<h1>New Category</h1>
-<form
-  #f="ngForm"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  class="box"
-  name="form"
-  novalidate
->
-  <div class="form-group">
+<form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="box" name="form" novalidate>
+  <h1>Nowa kategoria</h1>
+  <div>
     <label for="categoryName"></label>
     <input
       #categoryName="ngModel"
       [(ngModel)]="form.categoryName"
-      class="form-control"
+      id="categoryName"
       name="categoryName"
       placeholder="New category name"
       required
       type="text"
     />
-    <div
-      *ngIf="f.submitted && categoryName.invalid"
-      class="alert alert-danger"
-      role="alert"
-    >
-      Category name is required!
-    </div>
   </div>
-  <div class="form-group">
+
+  <div>
     <label for="categoryDescription"></label>
-    <input
+    <textarea
       #password="ngModel"
       [(ngModel)]="form.categoryDescription"
-      class="form-control"
+      id="categoryDescription"
       name="categoryDescription"
       placeholder="Category description"
       type="text"
-    />
-    <div
-      *ngIf="f.submitted && form.invalid"
-      class="alert alert-danger"
-      role="alert"
-    >
-      <div *ngIf="form.categoryName.errors.required">aaaaaaaaa</div>
-    </div>
+    ></textarea>
   </div>
-  <div class="form-group">
-    <input name="" type="submit" value="Create">
-    <input name="" routerLink="/categories" value="Cancel">
+
+  <div>
+    <input class="admin-panel-button" type="submit" value="Stwórz">
+    <button class="admin-panel-button" routerLink="/categories">Anuluj</button>
   </div>
-  <!--  <div class="form-group">-->
-  <!--    <div-->
-  <!--      class="alert alert-danger"-->
-  <!--      role="alert"-->
-  <!--      *ngIf="f.submitted && isLoginFailed"-->
-  <!--    >-->
-  <!--      Błąd logowania: {{ errorMessage }}-->
-  <!--    </div>-->
-  <!--  </div>-->
+
+  <div *ngIf="f.submitted && categoryName.invalid" class="alerts" role="alert">
+    Category name is required!
+  </div>
+
 </form>

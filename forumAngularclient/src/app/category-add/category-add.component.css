@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  flex-direction: column;
+}
+
+.box h1 {
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.box div {
+  align-content: flex-start;
+}
+
+#categoryName {
+  height: 30px;
+}
+
+#categoryDescription {
+  height: 200px;
+}
+
+#categoryDescription, #categoryName {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.admin-panel-button {
+  width: 100px;
+  height: 50px;
+  margin: auto;
+}
+
+.alerts div {
+  margin-top: 10px;
+}
