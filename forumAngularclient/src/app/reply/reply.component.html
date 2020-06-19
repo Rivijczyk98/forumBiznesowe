@@ -1,14 +1,14 @@
 <div class="reply">
     <div>
-        <p>{{username}} | {{reply.postedDate | getFromDate}}</p>
+        <p style="text-align: right;">{{username}} | {{reply.postedDate | getFromDate}}</p>
         <br/>
     </div>
     <div>
-        <p>{{reply.text}}</p>
+        <p class="reply" id="text" style="text-align: left;">{{reply.text}}</p>
     </div>
     <div>
         <!-- <button *ngIf="hasRoleHigher(1)" (click)="reporting != reporting">ZGŁOŚ</button> -->
-        <button *ngIf="isAuthor()" (click)="delete()">USUŃ</button>
+        <button class="admin-panel-button" *ngIf="isAuthor()" (click)="delete()">USUŃ</button>
     </div>
     <!-- <div *ngIf="reporting">
         <form>

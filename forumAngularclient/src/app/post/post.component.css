@@ -2,4 +2,16 @@
     border: 2px solid white;
     margin: 10px;
     padding: 5px;
+
+}
+
+.post#text {
+    background-color: white;
+    color: black;
+}
+
+.post#formText {
+    background-color: white;
+    color: black;
+    border: 2px solid #2ecc71;
 }

@@ -1,46 +1,45 @@
 <!-- wyświetlanie postów -->
 <div class="post">
   <div *ngIf="!editing">
-    <h3 style="font-weight: bold;">{{post.title}}</h3>
+    <h1 style="font-weight: bold; text-align:left;">{{post.title}}</h1>
     <div *ngIf="post.author">
-      <p>{{post.author.username}} | {{post.postedDate | getFromDate}}</p>
+      <p style="text-align: right;">{{post.author.username}} | {{post.postedDate | getFromDate}}</p>
     </div>
-    <div>
-      <p>{{post.text}}</p>
+    <div class="post" id="text">
+      <p style="text-align: left;">{{post.text}}</p>
     </div>
 
-    <div>
-      <!-- <div *ngIf="tokenService.getUser().id == post.author.id">
-          <button (click)="editPost()">EDYTUJ</button>
-      </div> -->
+    <div style="display: inline-flex;">
+      <div  *ngIf="tokenService.getUser().id == post.author.id">
+          <button class="admin-panel-button" (click)="editPost()">EDYTUJ</button>
+      </div>
 
       <!-- <div *ngIf="reporting = != reporting">
           <button>ZGŁOŚ</button>
       </div> -->
-      <!-- <div *ngIf="tokenService.getUser().id == post.author.id">
-          <button (click)="delete()">USUŃ</button>
+      <div *ngIf="tokenService.getUser().id == post.author.id">
+          <button class="admin-panel-button" (click)="delete()">USUŃ</button>
       </div>
       <div *ngIf="tokenService.getUser().id == post.author.id &&
       !post.isObserved &&
-      tokenService.getUser().role.name > 1" >
-          <button (click)="changeIsObserved(true)">OBSERWUJ</button>
+      authService.isVipLoggedIn()" >
+          <button class="admin-panel-button" (click)="changeIsObserved(true)">OBSERWUJ</button>
       </div>
       <div *ngIf="tokenService.getUser().id == post.author.id &&
       post.isObserved &&
-      tokenService.getUser().role.name > 1">
-          <button (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
-      </div>-->
+      authService.isVipLoggedIn()">
+          <button class="admin-panel-button" (click)="changeIsObserved(false)">PRZESTAŃ OBSERWOWAĆ</button>
+      </div>
     </div>
   </div>
-
   <div *ngIf="editing">
-    <form #f="ngForm" (ngSubmit)="edit()" name="editForm" novalidate>
-      <input ([ngModel])="editForm.text" type="text" value="{{post.text}}"/>
-      <input type="submit" value="Zatwierdź"/>
+    <form #f="ngForm" (ngSubmit)="edit()" name="editForm">
+      <input class="post" id="formText" [(ngModel)]="editForm.text" name="text" type="text" value="{{post.text}}"/>
+      <input class="admin-panel-button" type="submit" value="Zatwierdź"/>
+      <button class="admin-panel-button" (click)="editing = false">Anuluj</button>
     </form>
-    <button (click)="editing = false">Anuluj</button>
+    
   </div>
-
 </div>
 
 <div *ngIf="reporting">
@@ -54,7 +53,7 @@
 <div *ngIf="isLoggedIn()">
   <form #f="ngForm" (ngSubmit)="reply()" name="form" novalidate>
     <input [(ngModel)]="form.text" name="text" type="text"/>
-    <input type="submit" value="Odpowiedz"/>
+    <input class="admin-panel-button" type="submit" value="Odpowiedz"/>
   </form>
 </div>
 

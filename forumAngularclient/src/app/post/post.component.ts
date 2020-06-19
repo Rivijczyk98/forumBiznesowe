@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ReplyService} from '../_services/reply.service';
 import {Reply} from '../_model/reply';
 import {TokenStorageService} from '../_services/token-storage.service';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -26,7 +27,8 @@ export class PostComponent implements OnInit {
     private replyService: ReplyService,
     private route: ActivatedRoute,
     private router: Router,
-    private tokenService: TokenStorageService) {
+    public tokenService: TokenStorageService,
+    public authService: AuthService) {
     this.load();
   }
 
@@ -51,16 +53,17 @@ export class PostComponent implements OnInit {
     });
   }
 
-  reply() {
+  async reply() {
     const newReply: Reply = new Reply(this.tokenService.getUser().id, this.form.text, this.post.id, new Date());
-    this.replyService.addReply(newReply).subscribe(res => {
-      this.ngOnInit();
+    await this.replyService.addReply(newReply).subscribe(res => {
+      
     });
-    this.replies.push(newReply);
+
+    window.location.reload();
   }
 
   changeIsObserved(isO: boolean) {
-    this.postService.changeIsObserved(isO, this.post);
+    this.postService.changeIsObserved(isO, this.post).subscribe();
     this.post.isObserved = isO;
   }
 
@@ -82,7 +85,8 @@ export class PostComponent implements OnInit {
 
   edit() {
     this.post.text = this.editForm.text;
-    this.postService.updatePost(this.post);
+    console.log(this.editForm.text)
+    this.postService.updatePost(this.post).subscribe();
     this.editing = false;
     this.ngOnInit();
   }

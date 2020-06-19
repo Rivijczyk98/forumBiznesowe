@@ -14,6 +14,7 @@ import pl.edu.pb.wi.forumbiznesowe.dao.entity.Role;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.User;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.PostStatusEnum;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.enums.RoleEnum;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.PostService;
 
 import java.util.LinkedList;
@@ -25,19 +26,16 @@ public class PostServiceImpl implements PostService {
     Logger logger = LoggerFactory.getLogger(PostServiceImpl.class);
 
     private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, CategoryRepository categoryRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.postRepository = postRepository;
+        this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -87,8 +85,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void update(Post post) {
-        postRepository.save(post);
+    public void update(PostRequest post) {
+        if(find(post.getId()).isPresent()){
+            Post p = find(post.getId()).get();
+            p.setText(post.getText());
+            postRepository.save(p);
+        }
     }
 
     public void setAsApproved(Post post) {

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
+import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
 import java.util.Optional;
@@ -46,7 +47,7 @@ public class PostController {
     }
 
     @PutMapping("/update")
-    public void updatePost(@RequestBody Post post) {
+    public void updatePost(@RequestBody PostRequest post) {
         postService.update(post);
     }
 
@@ -61,7 +62,7 @@ public class PostController {
     }
 
     @PatchMapping("/observed")
-    public void changeIsObserved(@RequestParam Boolean isObserved, @RequestBody Post post) {
+    public void changeIsObserved(@RequestParam boolean isObserved, @RequestBody Post post) {
         postService.changeIsObserved(isObserved, post);
     }
 
