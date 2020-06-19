@@ -70,6 +70,7 @@ public class PostServiceImpl implements PostService {
             }
             post.setAuthor(user.get());
             post.setCategory(category.get());
+            post.setObserved(true);
 
             logger.info("Dodano post");
             postRepository.save(post);

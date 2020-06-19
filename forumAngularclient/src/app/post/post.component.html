@@ -1,10 +1,9 @@
 <!-- wyświetlanie postów -->
-<div>
+<div class="post">
   <div *ngIf="!editing">
-    <h3>{{post.title}}</h3>
+    <h3 style="font-weight: bold;">{{post.title}}</h3>
     <div *ngIf="post.author">
-      <p>{{post.author.username}}</p>
-      <p>{{post.postedDate | getFromDate}}</p>
+      <p>{{post.author.username}} | {{post.postedDate | getFromDate}}</p>
     </div>
     <div>
       <p>{{post.text}}</p>

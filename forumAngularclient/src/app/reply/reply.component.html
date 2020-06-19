@@ -1,19 +1,19 @@
 <div class="reply">
     <div>
-        <p>{{username}}</p>
-        <p>{{reply.postedDate | getFromDate}}</p>
+        <p>{{username}} | {{reply.postedDate | getFromDate}}</p>
+        <br/>
     </div>
     <div>
         <p>{{reply.text}}</p>
     </div>
     <div>
-        <button *ngIf="hasRoleHigher(1)" (click)="reporting != reporting">ZGŁOŚ</button>
+        <!-- <button *ngIf="hasRoleHigher(1)" (click)="reporting != reporting">ZGŁOŚ</button> -->
         <button *ngIf="isAuthor()" (click)="delete()">USUŃ</button>
     </div>
-    <div *ngIf="reporting">
+    <!-- <div *ngIf="reporting">
         <form>
             <input type="text"/>
             <input type="submit" name="" value="Wyślij">
         </form>
-    </div>
+    </div> -->
 </div>
