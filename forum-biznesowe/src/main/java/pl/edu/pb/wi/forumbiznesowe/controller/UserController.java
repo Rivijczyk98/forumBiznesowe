@@ -25,16 +25,16 @@ public class UserController {
         return userService.findAll();
     }
 
-    @GetMapping("/username")
-    public UsernameResponse getUsername(@RequestParam Long id){
-        return new UsernameResponse(userService.getUsername(id)) ;
-    }
-
     @GetMapping("/find")
     public User findUser(@RequestParam Long id) {
         return userService.findById(id);
     }
 
+
+    @GetMapping("/username")
+    public UsernameResponse getUsername(@RequestParam Long id){
+        return new UsernameResponse(userService.getUsername(id)) ;
+    }
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {

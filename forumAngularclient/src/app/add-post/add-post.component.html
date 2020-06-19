@@ -1,25 +1,26 @@
-<form class="box" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+<form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" class="box" name="form" novalidate>
   <h1>Dodawanie postu</h1>
 
   <div>
     <label for="title"></label>
-    <input id="title" type="text" name="title" placeholder="Podaj tytuł . . ." [(ngModel)]="post.title" required #title="ngModel"/>
+    <input #title="ngModel" [(ngModel)]="post.title" id="title" name="title" placeholder="Podaj tytuł . . ." required
+           type="text"/>
   </div>
 
   <div>
     <label for="text"></label>
-    <textarea id="text" type="text" name="text" rows="4" cols="50" [(ngModel)]="post.text" placeholder="Wprowadź treść . . ." required #text="ngModel"></textarea>
+    <textarea #text="ngModel" [(ngModel)]="post.text" cols="50" id="text" name="text" placeholder="Wprowadź treść . . ."
+              required rows="4" type="text"></textarea>
   </div>
 
   <div>
-    <button type="submit" class="admin-panel-button"  name="" value="Dodaj">Dodaj</button>
+    <button class="admin-panel-button" name="" type="submit" value="Dodaj">Dodaj</button>
   </div>
 
   <div class="alerts">
-    <div role="alert" *ngIf="f.submitted && title.invalid">Tytuł postu jest wymagany</div>
-    <div role="alert" *ngIf="f.submitted && text.invalid">Treść postu jest wymagana</div>
+    <div *ngIf="f.submitted && title.invalid" role="alert">Tytuł postu jest wymagany</div>
+    <div *ngIf="f.submitted && text.invalid" role="alert">Treść postu jest wymagana</div>
   </div>
-
 
 
 </form>

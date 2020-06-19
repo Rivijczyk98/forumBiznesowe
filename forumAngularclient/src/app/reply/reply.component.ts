@@ -1,64 +1,64 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Reply } from '../_model/reply';
-import { RepliesService } from '../_services/replies.service';
-import { ReportService } from '../_services/report.service';
-import { Report, ReportedObjectEnum } from '../_model/report';
-import { TokenStorageService } from '../_services/token-storage.service';
-import { Post } from '../_model/post';
-import { User } from '../_model/user';
-import { UserService } from '../_services/user.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {Reply} from '../_model/reply';
+import {ReplyService} from '../_services/reply.service';
+import {ReportService} from '../_services/report.service';
+import {TokenStorageService} from '../_services/token-storage.service';
+import {Post} from '../_model/post';
+import {UserService} from '../_services/user.service';
 
 @Component({
-  selector: 'reply',
+  selector: 'app-reply',
   templateUrl: './reply.component.html',
   styleUrls: ['./reply.component.css']
 })
 export class ReplyComponent implements OnInit {
 
-  @Input() object: any = {}
+  @Input() object: any = {};
 
   reply: Reply = null;
-  post: Post = new Post()
-  username: string = null;
+  post: Post = new Post();
+  username: string = "";
 
   reporting: boolean = false;
 
   constructor(
-    private reportService: ReportService, 
+    private reportService: ReportService,
     private tokenStorage: TokenStorageService,
-    private replyService: RepliesService,
-    private userService: UserService) { }
+    private replyService: ReplyService,
+    private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.reply = this.object.reply;
     this.post = this.object.post;
-    
+
+    console.log(this.reply)
     this.userService.getUsername(this.reply.author).subscribe(u => {
-      this.username = u.username
-    })
+      this.username = u.username;
+    });
   }
 
-  report(text: string){
+  // report(text: string){
+  //
+  //   this.reportService.addReport(
+  //     new Report(
+  //       this.tokenStorage.getUser(),
+  //       ReportedObjectEnum.REPLY,
+  //       this.post.id,
+  //       text
+  //     )
+  //   )
+  // }
 
-    this.reportService.addReport(
-      new Report(
-        this.tokenStorage.getUser(), 
-        ReportedObjectEnum.REPLY, 
-        this.post.id, 
-        text
-      )
-    )
-  }
-
-  hasRoleHigher(n: number):boolean{
+  hasRoleHigher(n: number): boolean {
     return this.tokenStorage.getUser().roles[0].name > n;
   }
 
-  isAuthor(): boolean{
+  isAuthor(): boolean {
     return this.tokenStorage.getUser().id == this.reply.author;
   }
 
-  delete(){
+  delete() {
     this.replyService.deleteReply(this.reply.id);
     this.ngOnInit();
   }

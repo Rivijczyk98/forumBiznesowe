@@ -16,6 +16,7 @@ import {AdministratorPanelComponent} from './administrator-panel/administrator-p
 import {PostListComponent} from './post-list/post-list.component';
 import {AddPostComponent} from './add-post/add-post.component';
 import {CategoryAddComponent} from './category-add/category-add.component';
+import {ReplyComponent} from './reply/reply.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {CategoryAddComponent} from './category-add/category-add.component';
     AdministratorPanelComponent,
     PostListComponent,
     AddPostComponent,
-    CategoryAddComponent
+    CategoryAddComponent,
+    ReplyComponent,
   ],
   imports: [
     BrowserModule,

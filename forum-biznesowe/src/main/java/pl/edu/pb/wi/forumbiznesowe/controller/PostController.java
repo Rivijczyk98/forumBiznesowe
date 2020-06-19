@@ -3,12 +3,11 @@ package pl.edu.pb.wi.forumbiznesowe.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Post;
-import pl.edu.pb.wi.forumbiznesowe.pojo.PostRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.PostServiceImpl;
 
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/posts")
 public class PostController {
@@ -31,17 +30,22 @@ public class PostController {
     }
 
     @PostMapping
-    public void addPost(@RequestBody Post post, @RequestParam long idUser, @RequestParam String categoryName) {
-        postService.add(post, idUser, categoryName);
+    public void addPost(@RequestBody Post post) {
+        postService.add(post);
     }
 
     @PostMapping("/suggest")
-    public void suggestPost(@RequestBody Post post, @RequestParam long idUser, @RequestParam String categoryName) {
-        postService.suggest(post, idUser, categoryName);
+    public void suggestPost(@RequestBody Post post) {
+        postService.suggest(post);
+    }
+
+    @PostMapping("/accept")
+    public void acceptPost(@RequestBody Post post){
+        postService.accept(post);
     }
 
     @PutMapping
-    public void updatePost(@RequestBody PostRequest post) {
+    public void updatePost(@RequestBody Post post) {
         postService.update(post);
     }
 
@@ -51,11 +55,10 @@ public class PostController {
     }
 
     @GetMapping("/category")
-    public Iterable<Post> getPostsByCategory(@RequestParam Long name){
-        return postService.getPostsByCategory(name);
+    public Iterable<Post> getPostsByCategory(@RequestParam Long id){
+        return postService.getPostsByCategory(id);
     }
 
-    @PatchMapping("/observed")
-    public void changeIsObserved(@RequestParam Boolean isObserved, @RequestBody Post post){ postService.changeIsObserved(isObserved, post);}
+    public void changeIsObserved(@RequestParam Long id){ postService.changeIsObserved(id);}
 
 }

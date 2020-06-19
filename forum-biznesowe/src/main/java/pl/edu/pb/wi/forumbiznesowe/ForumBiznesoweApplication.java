@@ -7,9 +7,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
-import pl.edu.pb.wi.forumbiznesowe.controller.PostController;
-import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
-import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.entity.Category;
@@ -45,8 +42,8 @@ public class ForumBiznesoweApplication {
 	@EventListener(ApplicationReadyEvent.class)
 	public void fillDB(){
 		Role a = new Role(RoleEnum.ROLE_USER);
-		Role b = new Role(RoleEnum.ROLE_VIP);
-		Role c = new Role(RoleEnum.ROLE_MODERATOR);
+		Role b = new Role(RoleEnum.ROLE_MODERATOR);
+		Role c = new Role(RoleEnum.ROLE_VIP);
 		Role d = new Role(RoleEnum.ROLE_ADMIN);
 
 		roleRepository.save(a);

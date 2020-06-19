@@ -1,17 +1,17 @@
-import { User } from './user';
-import { Post } from './post';
+import {User} from './user';
+import {Post} from './post';
 
 export class Reply {
-    id: number;
-    author: number;
-    text: string;
-    post: number;
-    postedDate: Date;
+  id: number;
+  author: number;
+  text: string;
+  post: Post;
+  postedDate: Date;
 
-    constructor(author, text, post, postedDate){
-        this.author = author;
-        this.text = text;
-        this.post = post;
-        this.postedDate = postedDate;
-    }
+  constructor(author, text, post, postedDate) {
+    this.author = author;
+    this.text = text;
+    this.post = post;
+    this.postedDate = postedDate;
+  }
 }

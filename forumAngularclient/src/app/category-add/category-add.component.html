@@ -1,26 +1,26 @@
 <h1>New Category</h1>
 <form
+  #f="ngForm"
+  (ngSubmit)="f.form.valid && onSubmit()"
   class="box"
   name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
   novalidate
 >
   <div class="form-group">
     <label for="categoryName"></label>
     <input
-      type="text"
+      #categoryName="ngModel"
+      [(ngModel)]="form.categoryName"
       class="form-control"
       name="categoryName"
       placeholder="New category name"
-      [(ngModel)]="form.categoryName"
       required
-      #categoryName="ngModel"
+      type="text"
     />
     <div
+      *ngIf="f.submitted && categoryName.invalid"
       class="alert alert-danger"
       role="alert"
-      *ngIf="f.submitted && categoryName.invalid"
     >
       Category name is required!
     </div>
@@ -28,24 +28,24 @@
   <div class="form-group">
     <label for="categoryDescription"></label>
     <input
-      type="text"
+      #password="ngModel"
+      [(ngModel)]="form.categoryDescription"
       class="form-control"
       name="categoryDescription"
       placeholder="Category description"
-      [(ngModel)]="form.categoryDescription"
-      #password="ngModel"
+      type="text"
     />
     <div
+      *ngIf="f.submitted && form.invalid"
       class="alert alert-danger"
       role="alert"
-      *ngIf="f.submitted && form.invalid"
     >
       <div *ngIf="form.categoryName.errors.required">aaaaaaaaa</div>
     </div>
   </div>
   <div class="form-group">
-    <input type="submit" name="" value="Create">
-    <input routerLink="/categories" name="" value="Cancel">
+    <input name="" type="submit" value="Create">
+    <input name="" routerLink="/categories" value="Cancel">
   </div>
   <!--  <div class="form-group">-->
   <!--    <div-->

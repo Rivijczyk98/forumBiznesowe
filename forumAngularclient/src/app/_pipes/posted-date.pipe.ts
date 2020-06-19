@@ -8,7 +8,8 @@ export class PostedDatePipe implements PipeTransform {
   transform(value: Date, ...args: unknown[]): string {
     let now: Date = new Date();
 
-    let ms: number = now.getTime() - value.getTime();
+    let ms: number; 
+    ms = now.getTime() - value.getTime();
 
     if(ms < 60000){
       return "Just now"
