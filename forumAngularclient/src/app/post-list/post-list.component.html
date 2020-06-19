@@ -9,23 +9,17 @@
   <table class="table-table">
     <thead>
     <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Author</th>
-      <th scope="col">Category</th>
-      <th scope="col">Title</th>
-      <th scope="col">Text</th>
-      <th scope="col">Status</th>
-      <th scope="col">Posted Date</th>
+      <th scope="col">Autor</th>
+      <th scope="col">Tytuł</th>
+      <th scope="col">Treść</th>
+      <th scope="col">Data dodania</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let post of posts" [routerLink]="['/post', post.id]">
-      <td>{{ post.id }}</td>
       <td>{{ post.author.username }}</td>
-      <td>{{ post.category.name }}</td>
       <td>{{ post.title }}</td>
       <td>{{ post.text }}</td>
-      <td>{{ post.status }}</td>
       <td>{{ post.postedDate }}</td>
     </tr>
     </tbody>

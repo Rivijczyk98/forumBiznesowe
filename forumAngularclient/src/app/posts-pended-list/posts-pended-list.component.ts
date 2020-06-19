@@ -23,4 +23,8 @@ export class PostsPendedListComponent implements OnInit {
   accept(post: Post) {
     this.postService.approvePost(post).subscribe(() => this.ngOnInit());
   }
+
+  deny(post: Post) {
+    this.postService.deletePost(post.id).subscribe(() => this.ngOnInit());
+  }
 }
