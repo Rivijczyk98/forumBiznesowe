@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {PostsService} from '../_services/posts.service';
+import {Component, OnInit} from '@angular/core';
+import {PostService} from '../_services/post.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Post} from '../_model/post';
 import {TokenStorageService} from '../_services/token-storage.service';
@@ -16,12 +16,18 @@ export class AddPostComponent implements OnInit {
 
   currentUser: any;
 
-  constructor(private postService: PostsService, private route: ActivatedRoute,  private router: Router,  private tokenStorageService: TokenStorageService) { }
+  constructor(
+    private postService: PostService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private tokenStorageService: TokenStorageService
+  ) {
+  }
 
   ngOnInit(): void {
     this.currentUser = this.tokenStorageService.getUser();
 
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(() => {
       this.category = this.route.snapshot.params.category;
     });
   }

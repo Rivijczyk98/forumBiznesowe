@@ -10,6 +10,7 @@ import pl.edu.pb.wi.forumbiznesowe.pojo.CategoryRequest;
 import pl.edu.pb.wi.forumbiznesowe.service.interfaces.CategoryService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -37,5 +38,28 @@ public class CategoryServiceImpl implements CategoryService {
 
         logger.info("Dodano kategorię");
         categoryRepository.save(category);
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+
+        if(category.isPresent()){
+            categoryRepository.delete(category.get());
+            System.out.println("Pomyślnie usunięto kategorię");
+        }
+        else {
+            System.out.println("Nie znaleziono kategorii poprzez id");
+        }
+    }
+
+    @Override
+    public void updateCategory(Category category) {
+        categoryRepository.save(category);
+    }
+
+    public Category findById(Long id) {
+        Optional<Category> category = categoryRepository.findById(id);
+        return category.orElse(null);
     }
 }

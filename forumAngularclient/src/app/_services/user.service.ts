@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../_model/user';
+
+const API = 'http://localhost:8081/users';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,10 @@ export class UserService {
 
   public giveRole(user: User, role: string) {
     return this.http.patch<User>(this.giveRoleUrl + '?role=' + role, user);
+  }
+
+  public getUsername(id: number): Observable<any> {
+    return this.http.get<any>(API + '/username?id=' + id);
   }
 
 

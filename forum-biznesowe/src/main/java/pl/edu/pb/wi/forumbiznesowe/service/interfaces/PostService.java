@@ -18,4 +18,6 @@ public interface PostService {
 
     void delete(Long id);
 
+    void accept(Post post);
+
 }

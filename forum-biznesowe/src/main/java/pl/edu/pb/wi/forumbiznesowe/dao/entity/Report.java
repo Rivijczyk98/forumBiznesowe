@@ -18,7 +18,7 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "use_id", nullable = false)
     private User author;
 
@@ -33,5 +33,4 @@ public class Report {
 
     public Report() {
     }
-
 }

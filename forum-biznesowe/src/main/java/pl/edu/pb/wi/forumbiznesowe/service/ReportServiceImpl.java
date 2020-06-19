@@ -76,4 +76,14 @@ public class ReportServiceImpl implements ReportService {
         reportRepository.save(report);
         return ResponseEntity.ok().body(report.getReportedObjectType() + " reported successfuly.");
     }
+
+    @Override
+    public Iterable<Report> findAll() {
+        return reportRepository.findAll();
+    }
+
+    @Override
+    public Optional<Report> findById(Long id) {
+        return reportRepository.findById(id);
+    }
 }

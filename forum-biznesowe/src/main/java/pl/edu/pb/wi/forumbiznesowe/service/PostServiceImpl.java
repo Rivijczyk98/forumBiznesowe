@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pb.wi.forumbiznesowe.dao.CategoryRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.PostRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.RoleRepository;
 import pl.edu.pb.wi.forumbiznesowe.dao.UserRepository;
@@ -80,6 +79,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public void accept(Post post){
+        post.setStatus(PostStatusEnum.APPROVED);
+        postRepository.save(post);
+    }
+
+    @Override
     public void update(Post post) {
         postRepository.save(post);
     }
@@ -108,17 +113,16 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
-    public Iterable<Post> getPostsByCategory(String name){
+    public Iterable<Post> getPostsByCategory(Long id){
         Iterable<Post> list = findAll();
         LinkedList<Post> newList = new LinkedList<>();
-
         for(Post p : list){
-            if(p.getCategory().getName().toLowerCase().equals(name.toLowerCase()) && p.getStatus() != PostStatusEnum.PENDING){
+            if(p.getCategory().getId().equals(id) && p.getStatus() != PostStatusEnum.PENDING){
                 newList.add(p);
             }
         }
 
-        logger.info("Zwrócono listę postów z kategorii: " + name);
+        logger.info("Zwrócono listę postów z kategorii");
         return newList;
     }
 

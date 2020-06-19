@@ -1,6 +1,6 @@
 <div class="nav">
-  <h1>{{category}}</h1>
-  <button [routerLink]="['/addpost', category]" class="admin-panel-button">Dodaj post</button>
+  <h1>{{category.name}}</h1>
+  <button [routerLink]="['/addpost', category.id]" class="admin-panel-button">Dodaj post</button>
 </div>
 
 <div class="table-body">

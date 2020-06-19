@@ -12,10 +12,11 @@ import {LoginComponent} from './login/login.component';
 import {PostComponent} from './post/post.component';
 import {PostedDatePipe} from './_pipes/posted-date.pipe';
 import {PostSummaryPipe} from './_pipes/post-summary.pipe';
-import {CategoryComponent} from './category/category.component';
 import {AdministratorPanelComponent} from './administrator-panel/administrator-panel.component';
-import { PostListComponent } from './post-list/post-list.component';
-import { AddPostComponent } from './add-post/add-post.component';
+import {PostListComponent} from './post-list/post-list.component';
+import {AddPostComponent} from './add-post/add-post.component';
+import {CategoryAddComponent} from './category-add/category-add.component';
+import {ReplyComponent} from './reply/reply.component';
 import { PostsPendedListComponent } from './posts-pended-list/posts-pended-list.component';
 
 @NgModule({
@@ -27,10 +28,12 @@ import { PostsPendedListComponent } from './posts-pended-list/posts-pended-list.
     PostComponent,
     PostedDatePipe,
     PostSummaryPipe,
-    CategoryComponent,
     LoginComponent,
     AdministratorPanelComponent,
     PostListComponent,
+    AddPostComponent,
+    CategoryAddComponent,
+    ReplyComponent,
     AddPostComponent,
     PostsPendedListComponent
   ],

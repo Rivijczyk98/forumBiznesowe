@@ -51,8 +51,8 @@ public class PostController {
     }
 
     @GetMapping("/category")
-    public Iterable<Post> getPostsByCategory(@RequestParam String name){
-        return postService.getPostsByCategory(name);
+    public Iterable<Post> getPostsByCategory(@RequestParam Long id){
+        return postService.getPostsByCategory(id);
     }
 
     @GetMapping("/category-pended")
