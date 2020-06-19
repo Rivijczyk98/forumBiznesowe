@@ -3,3 +3,8 @@
     margin: 5px;
     padding: 5px;
 }
+
+.reply#text {
+    background-color: white;
+    color: black;
+}

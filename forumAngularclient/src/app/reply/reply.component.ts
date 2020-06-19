@@ -57,9 +57,12 @@ export class ReplyComponent implements OnInit {
     return this.tokenStorage.getUser().id == this.reply.author;
   }
 
-  delete() {
-    this.replyService.deleteReply(this.reply.id).subscribe();
-    window.location.reload();
+  async delete() {
+    console.log(this.reply.id)
+    await this.replyService.deleteReply(this.reply.id).subscribe(p => {
+
+    });
+    
   }
 
 }

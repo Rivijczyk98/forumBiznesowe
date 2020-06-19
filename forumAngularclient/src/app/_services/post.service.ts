@@ -49,7 +49,7 @@ export class PostService {
 
 
   public changeIsObserved(isOb: boolean, post: Post) {
-    return this.http.patch<Post>(API + '/observed?id=' + isOb, post);
+    return this.http.patch<Post>(API + '/observed?isObserved=' + isOb, post);
   }
 
 }
