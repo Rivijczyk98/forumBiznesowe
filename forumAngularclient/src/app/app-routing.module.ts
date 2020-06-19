@@ -19,11 +19,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'admin_panel', component: AdministratorPanelComponent, canActivate: [AdminguardService]},
-  {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'post/:id', component: PostComponent, pathMatch: 'full'},
   {path: 'addpost/:id', component: AddPostComponent, canActivate: [UserguardService]},
   {path: 'posts_pended', component: PostsPendedListComponent, canActivate: [ModguardService]},
   {path: 'categories/new', component: CategoryAddComponent, canActivate: [UserguardService]},
+  {path: 'categories/:id', component: PostListComponent, pathMatch: 'full'},
   {path: 'categories/edit/:id', component: CategoryEditComponent, canActivate: [UserguardService]},
   {path: 'categories', component: HomeComponent},
   {path: '', redirectTo: 'categories', pathMatch: 'full'}
